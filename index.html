@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiên Tòa Liêm Chính - Mô phỏng Thẩm phán</title>
+    <meta name="description" content="Trò chơi mô phỏng thẩm phán xét xử các vụ án tham nhũng, tiêu cực theo tư tưởng Hồ Chí Minh">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- LANDING SCREEN -->
+    <div id="screen-landing" class="screen active">
+        <div class="landing-bg">
+            <div class="particle-field" id="particles"></div>
+            <div class="landing-content">
+                <div class="emblem">⚖️</div>
+                <h1 class="landing-title">PHIÊN TÒA LIÊM CHÍNH</h1>
+                <p class="landing-subtitle">Mô phỏng Thẩm phán — Xây dựng Nhà nước trong sạch, vững mạnh</p>
+                <p class="landing-quote">"Trăm điều phải có thần linh pháp quyền"<br><span>— Hồ Chí Minh</span></p>
+                <div class="landing-buttons">
+                    <button class="btn btn-primary btn-glow" onclick="showScreen('screen-theory')">
+                        📖 Xem Lí Thuyết
+                    </button>
+                    <button class="btn btn-secondary" onclick="showScreen('screen-quiz-intro')">
+                        ⚖️ Vào Phiên Tòa
+                    </button>
+                </div>
+                <p class="landing-hint">💡 Nên xem lí thuyết trước khi vào phiên tòa</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- THEORY SCREEN -->
+    <div id="screen-theory" class="screen">
+        <div class="theory-container">
+            <div class="theory-header">
+                <button class="btn-back" onclick="showScreen('screen-landing')">← Quay lại</button>
+                <h2>📚 Nội dung Lí Thuyết</h2>
+                <p>Tư tưởng Hồ Chí Minh về xây dựng Nhà nước trong sạch, vững mạnh</p>
+            </div>
+            <div class="theory-tabs">
+                <button class="tab-btn active" onclick="showTab(0)">Phần 1</button>
+                <button class="tab-btn" onclick="showTab(1)">Phần 2</button>
+                <button class="tab-btn" onclick="showTab(2)">Phần 3</button>
+                <button class="tab-btn" onclick="showTab(3)">Phần 4</button>
+            </div>
+            <div class="theory-content">
+                <!-- ============================================ -->
+                <!-- PART 1: KIỂM SOÁT QUYỀN LỰC NHÀ NƯỚC       -->
+                <!-- ============================================ -->
+                <div class="tab-content active" id="tab-0">
+                    <div class="theory-section">
+                        <h3>⚡ PHẦN 1: KIỂM SOÁT QUYỀN LỰC NHÀ NƯỚC</h3>
+                        
+                        <div class="theory-card">
+                            <div class="card-icon">🔑</div>
+                            <h4>1. Sự tất yếu của việc kiểm soát quyền lực</h4>
+                            
+                            <div class="theory-point">
+                                <span class="label">Bản chất:</span> Quyền lực nhà nước là do <strong>nhân dân ủy thác</strong>. Nhà nước của dân, do dân và vì dân — tức là mọi quyền lực đều bắt nguồn từ nhân dân. Cán bộ, công chức chỉ là những người được nhân dân giao phó quyền lực để thực hiện nhiệm vụ phục vụ nhân dân, chứ không phải chủ nhân của quyền lực đó.
+                            </div>
+                            <div class="theory-point danger">
+                                <span class="label">Nguy cơ:</span> Khi nắm giữ quyền lực, các cơ quan hoặc cán bộ <strong>dễ có xu hướng lạm quyền</strong>, "cậy thế, cậy quyền", quên đi nhiệm vụ chính là <strong>phục vụ nhân dân</strong>. Quyền lực có tính hai mặt: một mặt giúp thực thi chính sách vì dân, mặt khác có thể bị tha hóa nếu không được kiểm soát. Đây là quy luật phổ biến của quyền lực — bất kỳ ai nắm giữ quyền lực đều có nguy cơ lạm dụng nếu thiếu giám sát.
+                            </div>
+                            <div class="theory-point success">
+                                <span class="label">Mục đích kiểm soát:</span> Để <strong>giữ vững bản chất</strong> của Nhà nước, <strong>đảm bảo hoạt động hiệu quả</strong> và <strong>phòng chống sự tha hóa, biến chất</strong> của đội ngũ cán bộ. Kiểm soát quyền lực không phải là sự nghi ngờ cán bộ, mà là cơ chế bảo vệ cả cán bộ lẫn nhân dân, giúp Nhà nước thực sự trong sạch và vững mạnh.
+                            </div>
+                        </div>
+
+                        <div class="theory-card">
+                            <div class="card-icon">🏛️</div>
+                            <h4>2. Các hình thức kiểm soát quyền lực</h4>
+                            
+                            <div class="theory-note">
+                                <strong>Đây là vai trò, trách nhiệm của Đảng Cộng sản Việt Nam.</strong>
+                                <br><br>
+                                Theo Hồ Chí Minh, cần có <strong>hai điều kiện</strong> cho việc kiểm soát quyền lực:
+                                <br>
+                                <div style="padding: 8px 0 8px 16px;">
+                                    <strong>① Kiểm soát phải có hệ thống</strong> — tức là phải được tổ chức bài bản, có quy trình, có cơ chế rõ ràng, không phải kiểm soát một cách tùy tiện, ngẫu hứng.
+                                    <br>
+                                    <strong>② Người đi kiểm soát phải là những người rất có uy tín</strong> — phải có đạo đức, năng lực, được nhân dân và tổ chức tin tưởng.
+                                </div>
+                                <br>
+                                Người còn nêu rõ <strong>hai cách kiểm soát</strong>:
+                                <div style="padding: 8px 0 8px 16px;">
+                                    <strong>① Từ trên xuống:</strong> Cấp trên kiểm tra, giám sát cấp dưới.<br>
+                                    <strong>② Từ dưới lên:</strong> Cấp dưới và nhân dân giám sát, phản ánh hoạt động của cấp trên.
+                                </div>
+                                <br>
+                                Người nhấn mạnh, phải <em><strong>"khéo kiểm soát"</strong></em> — tức là kiểm soát phải đúng cách, đúng phương pháp, vừa nghiêm khắc vừa linh hoạt, không máy móc cứng nhắc.
+                            </div>
+                            
+                            <div class="two-columns">
+                                <div class="column-card internal">
+                                    <h5>🔵 Kiểm soát BÊN TRONG <br><small>(Kiểm soát của Nhà nước)</small></h5>
+                                    <ul>
+                                        <li><strong>Cách thức tổ chức bộ máy nhà nước</strong> và việc <strong>phân công, phân nhiệm</strong> giữa các cơ quan thực thi quyền lực nhà nước — mỗi cơ quan có chức năng, nhiệm vụ riêng biệt, tạo cơ chế kiểm soát lẫn nhau.</li>
+                                        <li>Được ghi rõ trong <strong>Hiến pháp 1946</strong> — bản Hiến pháp đầu tiên của nước Việt Nam Dân chủ Cộng hòa, do Chủ tịch Hồ Chí Minh chủ trì soạn thảo.</li>
+                                        <li><strong>Nghị viện nhân dân có quyền <em>"Kiểm soát và phê bình Chính phủ"</em></strong> — đây là quyền hiến định, thể hiện cơ chế giám sát quyền lực giữa cơ quan lập pháp và hành pháp.</li>
+                                        <li>Áp dụng chế độ <strong>bỏ phiếu tín nhiệm</strong>: <em>"Bộ trưởng nào không được Nghị viện tín nhiệm thì phải từ chức"</em> — cơ chế "thuận thì ở, nghịch thì đi", đảm bảo chỉ những người được tin tưởng mới giữ chức vụ quan trọng.</li>
+                                    </ul>
+                                </div>
+                                <div class="column-card external">
+                                    <h5>🟠 Kiểm soát BÊN NGOÀI <br><small>(Kiểm soát của nhân dân)</small></h5>
+                                    <ul>
+                                        <li>Nhân dân là <strong>chủ thể tối cao</strong> của quyền lực nhà nước, vì vậy nhân dân có quyền và trách nhiệm kiểm soát hoạt động của bộ máy nhà nước.</li>
+                                        <li>Hồ Chí Minh nhấn mạnh: <em><strong>"Phải tổ chức sự kiểm soát, mà muốn kiểm soát đúng thì cũng phải có quần chúng giúp mới được"</strong></em> — kiểm soát không thể chỉ dựa vào bộ máy nhà nước, mà phải có sự tham gia của đông đảo quần chúng nhân dân.</li>
+                                        <li>Đảng và Nhà nước phải <strong>dựa hẳn vào quần chúng</strong> để đôn đốc và kiểm tra công việc — đây là phương châm "lấy dân làm gốc" trong giám sát quyền lực.</li>
+                                        <li>Kiểm soát bên ngoài đảm bảo tính <strong>minh bạch</strong> và <strong>trách nhiệm giải trình</strong> của cán bộ, công chức đối với nhân dân — người chủ thực sự của đất nước.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="theory-highlight">
+                                <span class="highlight-icon">💡</span>
+                                <p><strong>Tóm lại:</strong> Theo Hồ Chí Minh, kiểm soát quyền lực phải đồng thời thực hiện cả hai hình thức: <strong>bên trong</strong> (giữa các cơ quan nhà nước) và <strong>bên ngoài</strong> (của nhân dân). Cả hai hình thức phải kết hợp chặt chẽ, bổ sung lẫn nhau để tạo thành hệ thống kiểm soát toàn diện, hiệu quả.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================ -->
+                <!-- PART 2: PHÒNG, CHỐNG TIÊU CỰC               -->
+                <!-- ============================================ -->
+                <div class="tab-content" id="tab-1">
+                    <div class="theory-section">
+                        <h3>🚨 PHẦN 2: PHÒNG, CHỐNG TIÊU CỰC TRONG NHÀ NƯỚC</h3>
+                        
+                        <p class="theory-note">Hồ Chí Minh <strong>đặc biệt nhắc nhở</strong> phải đề phòng và khắc phục những <strong>căn bệnh</strong> sau đây trong bộ máy nhà nước. Đây là những biểu hiện tiêu cực nguy hiểm có thể phá hoại bản chất của Nhà nước dân chủ nhân dân.</p>
+
+                        <div class="theory-card">
+                            <div class="card-icon">👑</div>
+                            <h4>1. Đặc quyền, đặc lợi</h4>
+                            <div class="theory-point danger">
+                                <span class="label">Biểu hiện:</span> Tư tưởng <strong>"cửa quyền"</strong>, hách dịch với dân, <strong>lạm dụng chức quyền để vơ vét tiền của cho cá nhân</strong>. Những cán bộ mắc căn bệnh này coi mình là "quan" chứ không phải "đầy tớ" của nhân dân, tự cho mình những đặc quyền mà nhân dân không có, hưởng thụ những đặc lợi không chính đáng từ chức vụ.
+                            </div>
+                            <div class="theory-point">
+                                <span class="label">Bản chất:</span> Đây là <strong>biểu hiện của chủ nghĩa cá nhân</strong> — đặt lợi ích cá nhân lên trên lợi ích tập thể và nhân dân. Khi cán bộ coi quyền lực như tài sản riêng để trục lợi thay vì công cụ phục vụ nhân dân, đó là lúc bản chất Nhà nước bị xâm hại nghiêm trọng.
+                            </div>
+                        </div>
+
+                        <div class="theory-card highlight-red">
+                            <div class="card-icon">⚔️</div>
+                            <h4>2. "Giặc nội xâm": Tham ô, Lãng phí, Quan liêu</h4>
+                            <p style="margin-bottom: 16px; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7;">
+                                Hồ Chí Minh gọi tham ô, lãng phí, quan liêu là <strong>"giặc nội xâm"</strong> — loại giặc từ bên trong, nguy hiểm không kém giặc ngoại xâm. Ba căn bệnh này có mối quan hệ mật thiết, trong đó <strong>quan liêu là bệnh gốc</strong>.
+                            </p>
+                            
+                            <div class="disease-grid">
+                                <div class="disease-item tham-o">
+                                    <h5>💰 Tham ô</h5>
+                                    <p>Lấy <strong>của công</strong> dùng vào <strong>việc tư</strong>, quên cả thanh liêm, đạo đức.</p>
+                                    <p class="small-text">Đây là hành vi chiếm đoạt tài sản công, nhận hối lộ, lợi dụng chức quyền để thu lợi bất chính. Bao gồm: ăn cắp ngân sách, nhận "phong bì", "lót tay", lợi dụng dự án để trục lợi cá nhân.</p>
+                                </div>
+                                <div class="disease-item lang-phi">
+                                    <h5>🔥 Lãng phí</h5>
+                                    <p>Lãng phí <strong>sức lao động</strong>, <strong>thời gian</strong> và <strong>tiền của</strong>.</p>
+                                    <p class="small-text">Đây là căn bệnh mà Người <strong>lên án gay gắt</strong>, vì đó là <strong>mồ hôi nước mắt của dân</strong>. Chi tiêu xa hoa, tổ chức hoạt động phô trương hình thức, sử dụng tài sản công không hiệu quả đều là lãng phí.</p>
+                                </div>
+                                <div class="disease-item quan-lieu">
+                                    <h5>📋 Quan liêu</h5>
+                                    <p>Là <strong>"bệnh gốc"</strong> sinh ra tham ô, lãng phí.</p>
+                                    <p class="small-text"><strong>Biểu hiện:</strong> Chỉ biết khai hội, viết chỉ thị, xem báo cáo trên giấy mà <strong>không kiểm tra thực tế</strong>, xa rời quần chúng.</p>
+                                </div>
+                            </div>
+
+                            <div class="theory-card" style="margin: 16px 0 0 0; background: rgba(0,0,0,0.2); border-color: rgba(41, 128, 185, 0.3);">
+                                <h5 style="color: var(--blue-light); margin-bottom: 10px;">📋 Phân tích sâu: Bệnh QUAN LIÊU</h5>
+                                <div class="theory-point danger">
+                                    <span class="label">Biểu hiện cụ thể:</span> Cán bộ chỉ biết khai hội, viết chỉ thị, xem báo cáo trên giấy mà <strong>không kiểm tra thực tế</strong>, xa rời quần chúng. Hồ Chí Minh mô tả: <em><strong>"có mắt mà không thấy suốt, có tai mà không nghe thấu"</strong></em> — tức là cán bộ có đầy đủ phương tiện để biết sự thật nhưng lại không thèm quan tâm, không chịu lắng nghe.
+                                </div>
+                                <div class="theory-point" style="background: rgba(41, 128, 185, 0.1); border-left: 3px solid var(--blue);">
+                                    <span class="label">Mối quan hệ nhân quả:</span> Bệnh quan liêu đã <strong>ấp ủ, dung túng, che chở</strong> cho nạn tham ô, lãng phí. Khi lãnh đạo xa rời thực tế, không giám sát sát sao, thì cấp dưới có cơ hội tham ô, lãng phí mà không bị phát hiện.
+                                </div>
+                            </div>
+
+                            <div class="theory-highlight">
+                                <span class="highlight-icon">⚠️</span>
+                                <p><strong>KẾT LUẬN QUAN TRỌNG:</strong> Muốn trừ sạch tham ô, lãng phí thì <strong>trước hết phải TẨY SẠCH BỆNH QUAN LIÊU</strong>. Đây là nguyên tắc "chữa bệnh từ gốc" — nếu chỉ xử lý tham ô, lãng phí mà không xóa bỏ quan liêu thì tiêu cực sẽ tái phát.</p>
+                            </div>
+                        </div>
+
+                        <div class="theory-card">
+                            <div class="card-icon">🕸️</div>
+                            <h4>3. Các tiêu cực khác</h4>
+                            <div class="badge-list">
+                                <div class="badge-item">
+                                    <span class="badge">Tư túng</span>
+                                    <p><strong>Kéo bè kéo cánh</strong>, đưa người thân cận <strong>không có tài năng</strong> vào chức vụ. Đây là hành vi "cài cắm" người nhà, người thân vào bộ máy nhà nước không dựa trên năng lực mà dựa trên quan hệ cá nhân.</p>
+                                </div>
+                                <div class="badge-item">
+                                    <span class="badge">Chia rẽ</span>
+                                    <p><strong>Gây mất đoàn kết nội bộ</strong>, chia phe phái, tạo bè nhóm lợi ích. Chia rẽ làm suy yếu sức mạnh tập thể, khiến bộ máy nhà nước hoạt động kém hiệu quả.</p>
+                                </div>
+                                <div class="badge-item">
+                                    <span class="badge">Kiêu ngạo</span>
+                                    <p><strong>Tự cao tự đại</strong>, không lắng nghe ý kiến người khác. Cán bộ kiêu ngạo tự cho mình luôn đúng, từ chối tiếp thu phê bình, coi thường tập thể, dẫn đến ra quyết định sai lầm.</p>
+                                </div>
+                                <div class="badge-item">
+                                    <span class="badge">Cậy thế</span>
+                                    <p><strong>Ỷ vào vị trí trong cơ quan Chính phủ</strong> để coi thường kỷ luật, coi thường người khác. Lợi dụng "cái bóng" của quyền lực để làm những việc vi phạm quy định, ép buộc người khác phục tùng, hạch sách nhân dân.</p>
+                                </div>
+                            </div>
+
+                            <div class="theory-highlight warning">
+                                <span class="highlight-icon">🔗</span>
+                                <p><strong>Lưu ý:</strong> Tất cả các biểu hiện tiêu cực trên đều có chung một <strong>gốc rễ là chủ nghĩa cá nhân</strong>. Chúng thường <strong>không xuất hiện đơn lẻ</strong> mà có sự kết hợp, đan xen — một cán bộ có thể đồng thời mắc nhiều căn bệnh cùng lúc (vừa tư túng, vừa cậy thế, vừa tham ô...).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================ -->
+                <!-- PART 3: NGUYÊN NHÂN TIÊU CỰC                -->
+                <!-- ============================================ -->
+                <div class="tab-content" id="tab-2">
+                    <div class="theory-section">
+                        <h3>🔍 PHẦN 3: NGUYÊN NHÂN CỦA CÁC BIỂU HIỆN TIÊU CỰC</h3>
+                        
+                        <p class="theory-note">Để tìm ra biện pháp phòng, chống tiêu cực trong bộ máy nhà nước, Hồ Chí Minh đã <strong>dày công luận giải nguyên nhân</strong> nảy sinh tiêu cực. Người phân chia thành hai nhóm nguyên nhân: <strong>chủ quan</strong> (từ bản thân cán bộ) và <strong>khách quan</strong> (từ môi trường, hệ thống).</p>
+
+                        <div class="theory-card">
+                            <div class="card-icon">🧠</div>
+                            <h4>1. Nguyên nhân chủ quan</h4>
+                            <div class="theory-point danger">
+                                <span class="label">Gốc rễ:</span> Bắt nguồn từ căn <strong>"bệnh mẹ" là CHỦ NGHĨA CÁ NHÂN</strong>. Đây là nguyên nhân sâu xa nhất, là cội nguồn sinh ra mọi biểu hiện tiêu cực.
+                            </div>
+                            <div class="theory-point">
+                                <span class="label">Cụ thể:</span> Từ sự <strong>thiếu tu dưỡng, rèn luyện</strong> của bản thân cán bộ. Khi cán bộ không thường xuyên tự phê bình, không rèn luyện đạo đức cách mạng, thì chủ nghĩa cá nhân sẽ nảy sinh và phát triển — đặt lợi ích cá nhân lên trên lợi ích tập thể, lên trên lợi ích của nhân dân.
+                            </div>
+                            <div class="theory-point" style="background: rgba(212, 168, 67, 0.08); border-left: 3px solid var(--gold);">
+                                <span class="label">Ý nghĩa:</span> Hồ Chí Minh gọi chủ nghĩa cá nhân là <strong>"bệnh mẹ"</strong> vì từ căn bệnh này sinh ra tất cả các "bệnh con" khác: tham ô, lãng phí, quan liêu, đặc quyền đặc lợi, tư túng, cậy thế, kiêu ngạo... Muốn chữa các bệnh con, phải chữa từ bệnh mẹ.
+                            </div>
+                        </div>
+
+                        <div class="theory-card">
+                            <div class="card-icon">🌍</div>
+                            <h4>2. Nguyên nhân khách quan</h4>
+                            <p style="margin-bottom: 16px; color: var(--text-secondary); font-size: 0.95rem;">
+                                Bên cạnh nguyên nhân chủ quan, Hồ Chí Minh cũng chỉ ra <strong>5 nguyên nhân khách quan</strong> từ môi trường bên ngoài tác động đến cán bộ:
+                            </p>
+                            <div class="cause-list">
+                                <div class="cause-item">
+                                    <span class="cause-num">01</span>
+                                    <div>
+                                        <p><strong>Công tác cán bộ của Đảng và Nhà nước chưa tốt</strong></p>
+                                        <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 4px;">Quy trình tuyển dụng, bổ nhiệm, đánh giá, luân chuyển cán bộ chưa khoa học, thiếu minh bạch. Khi công tác cán bộ lỏng lẻo, người không đủ tiêu chuẩn vẫn vào được bộ máy.</p>
+                                    </div>
+                                </div>
+                                <div class="cause-item">
+                                    <span class="cause-num">02</span>
+                                    <div>
+                                        <p><strong>Cách tổ chức, vận hành trong Đảng, trong Nhà nước và sự phối hợp chưa thật sự khoa học, hiệu quả</strong></p>
+                                        <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 4px;">Bộ máy cồng kềnh, chồng chéo chức năng, thiếu cơ chế phối hợp rõ ràng, dẫn đến kẽ hở cho tiêu cực. Chính sách bảo vệ cán bộ tố cáo sai phạm chưa hiệu quả.</p>
+                                    </div>
+                                </div>
+                                <div class="cause-item">
+                                    <span class="cause-num">03</span>
+                                    <div>
+                                        <p><strong>Trình độ phát triển còn thấp của đời sống xã hội</strong></p>
+                                        <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 4px;">Kinh tế chưa phát triển, đời sống vật chất khó khăn có thể tạo áp lực khiến cán bộ tìm cách trục lợi. Dân trí về pháp luật, dân chủ còn hạn chế.</p>
+                                    </div>
+                                </div>
+                                <div class="cause-item">
+                                    <span class="cause-num">04</span>
+                                    <div>
+                                        <p><strong>Tàn dư của những chính sách phản động của chế độ thực dân, phong kiến</strong></p>
+                                        <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 4px;">Tư tưởng "làm quan để hưởng lộc", "một người làm quan cả họ được nhờ" còn ăn sâu trong tiềm thức xã hội, ảnh hưởng đến tư duy và hành vi cán bộ.</p>
+                                    </div>
+                                </div>
+                                <div class="cause-item">
+                                    <span class="cause-num">05</span>
+                                    <div>
+                                        <p><strong>Âm mưu chống phá của các lực lượng phản động</strong></p>
+                                        <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 4px;">Các thế lực thù địch dùng nhiều thủ đoạn để mua chuộc, lôi kéo, cám dỗ cán bộ, đảng viên nhằm phá hoại Đảng và Nhà nước từ bên trong.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="theory-highlight warning">
+                                <span class="highlight-icon">⚡</span>
+                                <p>Các nguyên nhân này <strong>không tồn tại biệt lập</strong> mà có <strong>sự kết hợp với nhau</strong>. Nguyên nhân chủ quan và khách quan tác động qua lại, tạo điều kiện cho nhau. Nếu không có biện pháp phòng, chống và <strong>chính sách bảo vệ cán bộ hiệu quả</strong> thì <strong>nguy cơ mất cán bộ là rất lớn</strong>.</p>
+                            </div>
+                        </div>
+
+                        <div class="theory-card" style="border-color: rgba(212, 168, 67, 0.3);">
+                            <div class="card-icon">🗺️</div>
+                            <h4>Sơ đồ quan hệ nguyên nhân — tiêu cực</h4>
+                            <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px; text-align: center; line-height: 2;">
+                                <div style="font-size: 1.1rem; color: var(--red-light); font-weight: 700;">CHỦ NGHĨA CÁ NHÂN</div>
+                                <div style="font-size: 0.85rem; color: var(--text-dim);">(Bệnh mẹ — Nguyên nhân chủ quan)</div>
+                                <div style="font-size: 1.5rem; color: var(--gold);">↓</div>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 8px 0;">
+                                    <span style="background: rgba(231, 76, 60, 0.15); padding: 4px 12px; border-radius: 6px; font-size: 0.85rem;">Tham ô</span>
+                                    <span style="background: rgba(230, 126, 34, 0.15); padding: 4px 12px; border-radius: 6px; font-size: 0.85rem;">Lãng phí</span>
+                                    <span style="background: rgba(41, 128, 185, 0.15); padding: 4px 12px; border-radius: 6px; font-size: 0.85rem;">Quan liêu</span>
+                                    <span style="background: rgba(155, 89, 182, 0.15); padding: 4px 12px; border-radius: 6px; font-size: 0.85rem;">Đặc quyền</span>
+                                    <span style="background: rgba(26, 188, 156, 0.15); padding: 4px 12px; border-radius: 6px; font-size: 0.85rem;">Tư túng</span>
+                                    <span style="background: rgba(241, 196, 15, 0.15); padding: 4px 12px; border-radius: 6px; font-size: 0.85rem;">Cậy thế</span>
+                                    <span style="background: rgba(149, 165, 166, 0.15); padding: 4px 12px; border-radius: 6px; font-size: 0.85rem;">Kiêu ngạo</span>
+                                </div>
+                                <div style="font-size: 1.2rem; color: var(--gold); margin-top: 8px;">↑ tác động bởi ↑</div>
+                                <div style="font-size: 0.85rem; color: var(--text-dim); margin-top: 4px;">5 nguyên nhân khách quan (môi trường, hệ thống, lịch sử...)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================ -->
+                <!-- PART 4: BIỆN PHÁP XÂY DỰNG NHÀ NƯỚC         -->
+                <!-- ============================================ -->
+                <div class="tab-content" id="tab-3">
+                    <div class="theory-section">
+                        <h3>🛡️ PHẦN 4: CÁC BIỆN PHÁP XÂY DỰNG NHÀ NƯỚC TRONG SẠCH, VỮNG MẠNH</h3>
+
+                        <p class="theory-note">Để hình thành một Nhà nước <strong>đúng nghĩa của dân, do dân và vì dân</strong>, Hồ Chí Minh nêu ra <strong>5 biện pháp cơ bản</strong> sau đây. Các biện pháp này cần được thực hiện <strong>đồng bộ</strong>, kết hợp chặt chẽ với nhau.</p>
+                        
+                        <div class="measures-timeline">
+                            <div class="measure-card">
+                                <div class="measure-number">01</div>
+                                <h4>Biện pháp 1: Phát huy dân chủ trong xã hội</h4>
+                                <div class="theory-point success">
+                                    Đây là <strong>giải pháp CĂN BẢN</strong> và có <strong>ý nghĩa LÂU DÀI</strong> nhất trong tất cả các biện pháp.
+                                </div>
+                                <p>Nâng cao <strong>trình độ dân trí về dân chủ</strong>, thực hành dân chủ rộng rãi để nhân dân thực hiện quyền làm chủ của mình. Khi nhân dân hiểu rõ quyền và trách nhiệm của mình, họ sẽ tích cực tham gia giám sát bộ máy nhà nước, phát hiện và đấu tranh chống tiêu cực.</p>
+                                <div class="theory-point">
+                                    <span class="label">Cụ thể:</span> Tạo cơ chế để nhân dân tham gia đóng góp ý kiến vào các quyết sách, giám sát hoạt động của cán bộ, tố cáo sai phạm. Dân chủ phải được thực hành từ cơ sở (thôn, xã) lên đến trung ương.
+                                </div>
+                            </div>
+                            
+                            <div class="measure-card">
+                                <div class="measure-number">02</div>
+                                <h4>Biện pháp 2: Siết chặt kỷ luật Đảng và Pháp luật Nhà nước</h4>
+                                <div class="theory-point success">
+                                    <strong>"Trăm điều phải có thần linh pháp quyền"</strong> — Tuyệt nhiên <strong>KHÔNG CÓ BẤT CỨ VÙNG CẤM NÀO</strong> cho sự sai phạm.
+                                </div>
+                                <p><strong>Pháp luật phải nghiêm minh:</strong> Công tác kiểm tra phải <strong>thường xuyên</strong>, không theo kiểu phong trào hay đối phó.</p>
+                                <p style="margin-top: 8px;"><strong>Thẳng tay trừng trị:</strong> Đối với những kẻ thoái hóa, biến chất, <strong>dù ở địa vị nào, làm nghề nghiệp gì</strong> cũng phải bị xử lý nghiêm theo pháp luật. Không ai đứng trên pháp luật, không có ngoại lệ.</p>
+                                
+                                <div class="ref-box" style="margin-top: 16px;">
+                                    <span>📜</span>
+                                    <div>
+                                        <p style="font-weight: 600; color: var(--text-primary) !important; margin-bottom: 8px !important;">Liên hệ thực tiễn — Các Quy định của Bộ Chính trị:</p>
+                                        <p><strong>Quy định số 131-QĐ/TW</strong>, ngày 27/10/2023 — Về kiểm soát quyền lực, phòng, chống tham nhũng, tiêu cực <strong>trong công tác kiểm tra, giám sát, thi hành kỷ luật đảng</strong> và trong hoạt động thanh tra, kiểm toán.</p>
+                                        <p><strong>Quy định số 132-QĐ/TW</strong>, ngày 27/10/2023 — Về kiểm soát quyền lực, phòng, chống tham nhũng, tiêu cực <strong>trong hoạt động điều tra, truy tố, xét xử, thi hành án</strong>.</p>
+                                        <p><strong>Quy định số 144-QĐ/TW</strong>, ngày 09/5/2024 — Về <strong>chuẩn mực đạo đức cách mạng</strong> của cán bộ, đảng viên trong giai đoạn mới.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="measure-card">
+                                <div class="measure-number">03</div>
+                                <h4>Biện pháp 3: Kết hợp giữa "Xây" và "Chống" (Giáo dục và Trừng phạt)</h4>
+                                <p style="margin-bottom: 12px;">Hồ Chí Minh chủ trương kết hợp chặt chẽ giữa hai mặt: <strong>xử phạt nghiêm minh</strong> (Chống) và <strong>giáo dục đạo đức</strong> (Xây). Không thể chỉ chống mà không xây, cũng không thể chỉ xây mà không chống.</p>
+                                <div class="two-columns compact">
+                                    <div class="column-card" style="border-color: rgba(192, 57, 43, 0.3);">
+                                        <h5>🔨 "CHỐNG" — Xử phạt</h5>
+                                        <p>Cần <strong>nghiêm minh, đúng người đúng tội</strong>.</p>
+                                        <p style="margin-top: 8px;">Hồ Chí Minh đã từng <strong>ký sắc lệnh tử hình</strong> đối với tội tham ô, trộm cắp ở mức cao nhất để <strong>làm gương</strong> — thể hiện quyết tâm sắt đá trong việc trừng trị tham nhũng.</p>
+                                    </div>
+                                    <div class="column-card" style="border-color: rgba(39, 174, 96, 0.3);">
+                                        <h5>📚 "XÂY" — Giáo dục</h5>
+                                        <p><strong>Coi trọng việc giáo dục đạo đức cách mạng</strong>, khơi dậy lương tâm trong mỗi con người.</p>
+                                        <p style="margin-top: 8px;">Người cán bộ phải giữ được cái <strong>"tâm"</strong> trong sạch, tránh việc <strong>"dĩ công vi tư"</strong> (lấy việc công làm việc tư).</p>
+                                    </div>
+                                </div>
+                                <div class="theory-point" style="margin-top: 12px; background: rgba(212, 168, 67, 0.08); border-left: 3px solid var(--gold);">
+                                    <span class="label">Phương châm:</span> Làm cho <strong>cái tốt trong mỗi người được phát huy</strong> và <strong>cái xấu mất dần đi</strong>. Giáo dục giúp ngăn ngừa tiêu cực từ gốc (phòng bệnh), xử phạt giúp loại bỏ tiêu cực đã xảy ra (chữa bệnh). Kết hợp cả hai mới đạt hiệu quả toàn diện.
+                                </div>
+                            </div>
+                            
+                            <div class="measure-card">
+                                <div class="measure-number">04</div>
+                                <h4>Biện pháp 4: Cán bộ phải nêu gương</h4>
+                                <p><strong>Cán bộ phải đi trước làm gương cho quần chúng.</strong> Lời nói phải đi đôi với việc làm. Nếu cán bộ nói một đằng làm một nẻo, dân sẽ mất niềm tin.</p>
+                                <div class="theory-point success" style="margin-top: 12px;">
+                                    <span class="label">Nguyên tắc:</span> <strong>Chức vụ càng cao, trách nhiệm nêu gương càng lớn.</strong>
+                                </div>
+                                <div class="theory-point" style="background: rgba(212, 168, 67, 0.08); border-left: 3px solid var(--gold);">
+                                    <strong>Sự gương mẫu của người lãnh đạo là MỆNH LỆNH KHÔNG LỜI</strong> có sức thuyết phục nhất đối với nhân dân. Khi người lãnh đạo sống giản dị, liêm khiết, hết mình vì dân thì cấp dưới và nhân dân sẽ tự giác noi theo.
+                                </div>
+                                <div class="ref-box" style="margin-top: 12px;">
+                                    <span>📜</span>
+                                    <div>
+                                        <p style="font-weight: 600; color: var(--text-primary) !important; margin-bottom: 4px !important;">Liên hệ thực tiễn:</p>
+                                        <p><strong>Quy định số 114-QĐ/TW</strong> ngày 11/7/2023 của Bộ Chính trị — Về kiểm soát quyền lực và phòng, chống tham nhũng, tiêu cực <strong>trong công tác cán bộ</strong>. Quy định này đặc biệt nhấn mạnh trách nhiệm của người đứng đầu trong việc nêu gương và chịu trách nhiệm về công tác cán bộ thuộc thẩm quyền.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="measure-card">
+                                <div class="measure-number">05</div>
+                                <h4>Biện pháp 5: Huy động sức mạnh của chủ nghĩa yêu nước</h4>
+                                <p>Biến cuộc chiến chống tiêu cực thành một <strong>"cuộc chiến" của TOÀN DÂN</strong> dựa trên lòng tự hào và tự tôn dân tộc. Khi mỗi người dân đều coi chống tham nhũng là trách nhiệm với Tổ quốc, thì sức mạnh đấu tranh sẽ nhân lên gấp bội.</p>
+                                <div class="theory-point" style="background: rgba(192, 57, 43, 0.08); border-left: 3px solid var(--red);">
+                                    <span class="label">Trách nhiệm:</span> <strong>Bất kỳ người Việt Nam nào</strong>, dù là dân thường hay cán bộ, đều phải có trách nhiệm <strong>tu dưỡng và thực hành đạo đức cách mạng</strong> để bảo vệ danh dự của đất nước. Chống tiêu cực không chỉ là việc của cơ quan chức năng mà là nghĩa vụ của mọi công dân yêu nước.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="theory-card stats-card">
+                            <div class="card-icon">📊</div>
+                            <h4>Kết quả thực tiễn — Minh chứng các biện pháp đang phát huy hiệu quả</h4>
+                            <p style="margin-bottom: 16px; font-size: 0.95rem; color: var(--text-secondary);">
+                                Một số kết quả cho thấy các biện pháp trên khi áp dụng vào thực tiễn <strong>đang có tiến triển tốt</strong>:
+                            </p>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <div class="stat-number">130</div>
+                                    <div class="stat-label">người đứng đầu và cấp phó <strong>bị kỷ luật</strong> vì để xảy ra tham nhũng, tiêu cực <strong>năm 2024</strong></div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">22.000+</div>
+                                    <div class="stat-label">tỉ đồng <strong>thu hồi tài sản</strong> từ các vụ án tham nhũng và kinh tế <strong>năm 2024</strong></div>
+                                </div>
+                            </div>
+                            <div class="theory-point success" style="margin-top: 16px;">
+                                Những con số trên cho thấy quyết tâm <strong>"không có vùng cấm, không có ngoại lệ"</strong> đang được thực hiện nghiêm túc. Việc xử lý nghiêm minh cả người đứng đầu thể hiện nguyên tắc "chức vụ càng cao, trách nhiệm càng lớn" theo đúng tư tưởng Hồ Chí Minh.
+                            </div>
+                        </div>
+
+                        <div class="theory-card" style="border-color: rgba(212, 168, 67, 0.3); background: linear-gradient(135deg, rgba(212, 168, 67, 0.05), var(--bg-card));">
+                            <div class="card-icon">📋</div>
+                            <h4>Tổng kết: Bảng quy định quan trọng cần nhớ</h4>
+                            <div style="overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 12px;">
+                                    <thead>
+                                        <tr style="border-bottom: 2px solid var(--gold-dim);">
+                                            <th style="text-align: left; padding: 10px; color: var(--gold);">Quy định</th>
+                                            <th style="text-align: left; padding: 10px; color: var(--gold);">Ngày ban hành</th>
+                                            <th style="text-align: left; padding: 10px; color: var(--gold);">Phạm vi áp dụng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="border-bottom: 1px solid var(--border);">
+                                            <td style="padding: 10px; font-weight: 600;">QĐ 114-QĐ/TW</td>
+                                            <td style="padding: 10px; color: var(--text-secondary);">11/7/2023</td>
+                                            <td style="padding: 10px; color: var(--text-secondary);">Kiểm soát quyền lực trong <strong>công tác cán bộ</strong></td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border);">
+                                            <td style="padding: 10px; font-weight: 600;">QĐ 131-QĐ/TW</td>
+                                            <td style="padding: 10px; color: var(--text-secondary);">27/10/2023</td>
+                                            <td style="padding: 10px; color: var(--text-secondary);">Kiểm soát quyền lực trong <strong>kiểm tra, giám sát, kỷ luật đảng</strong> + thanh tra, kiểm toán</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border);">
+                                            <td style="padding: 10px; font-weight: 600;">QĐ 132-QĐ/TW</td>
+                                            <td style="padding: 10px; color: var(--text-secondary);">27/10/2023</td>
+                                            <td style="padding: 10px; color: var(--text-secondary);">Kiểm soát quyền lực trong <strong>điều tra, truy tố, xét xử, thi hành án</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px; font-weight: 600;">QĐ 144-QĐ/TW</td>
+                                            <td style="padding: 10px; color: var(--text-secondary);">09/5/2024</td>
+                                            <td style="padding: 10px; color: var(--text-secondary);"><strong>Chuẩn mực đạo đức cách mạng</strong> của cán bộ, đảng viên giai đoạn mới</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="theory-footer">
+                <button class="btn btn-primary btn-glow btn-large" onclick="showScreen('screen-quiz-intro')">
+                    ⚖️ Sẵn sàng vào Phiên Tòa
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUIZ INTRO SCREEN -->
+    <div id="screen-quiz-intro" class="screen">
+        <div class="quiz-intro-container">
+            <div class="judge-avatar">👨‍⚖️</div>
+            <h2>Chào mừng đến Phiên Tòa Liêm Chính</h2>
+            <p class="intro-desc">Bạn sẽ đóng vai một <strong>Thẩm phán</strong> xét xử các vụ án liên quan đến tiêu cực trong bộ máy nhà nước. Hãy áp dụng kiến thức từ tư tưởng Hồ Chí Minh để đưa ra phán quyết chính xác!</p>
+            
+            <div class="rules-box">
+                <h4>📋 Quy tắc phiên tòa</h4>
+                <div class="rule-item">
+                    <span class="rule-icon">🎯</span>
+                    <p>Mỗi vụ án, bạn cần xác định: <strong>Loại vi phạm</strong>, <strong>Nguyên nhân gốc rễ</strong>, và <strong>Biện pháp xử lý</strong></p>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">⏱️</span>
+                    <p>Thời gian tổng cộng: <strong>10 phút</strong> cho tất cả các vụ án</p>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">⭐</span>
+                    <p>Mỗi phán quyết đúng nhận <strong>điểm liêm chính</strong>. Điểm cao = Thẩm phán xuất sắc!</p>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">📚</span>
+                    <p>Tổng cộng <strong>8 vụ án</strong>, mỗi vụ có <strong>3 câu hỏi</strong></p>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-glow btn-large" onclick="startGame()">
+                🔨 Bắt đầu Phiên Tòa
+            </button>
+        </div>
+    </div>
+
+    <!-- GAME SCREEN -->
+    <div id="screen-game" class="screen">
+        <div class="game-container">
+            <div class="game-header">
+                <div class="game-info-left">
+                    <div class="case-counter">
+                        <span>Vụ án</span>
+                        <span id="case-current">1</span>/<span id="case-total">8</span>
+                    </div>
+                    <div class="question-dots" id="question-dots"></div>
+                </div>
+                <div class="game-timer" id="game-timer">
+                    <span class="timer-icon">⏱️</span>
+                    <span id="timer-display">10:00</span>
+                </div>
+                <div class="game-score">
+                    <span class="score-icon">⭐</span>
+                    <span id="score-display">0</span> điểm
+                </div>
+            </div>
+
+            <div class="case-panel" id="case-panel">
+                <!-- Case content injected by JS -->
+            </div>
+
+            <div class="question-panel" id="question-panel">
+                <!-- Question content injected by JS -->
+            </div>
+
+            <div class="verdict-panel hidden" id="verdict-panel">
+                <!-- Verdict feedback injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- RESULT SCREEN -->
+    <div id="screen-result" class="screen">
+        <div class="result-container" id="result-container">
+            <!-- Result content injected by JS -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
