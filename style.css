@@ -1368,6 +1368,66 @@ body {
     background: var(--gold);
 }
 
+/* Question step label */
+.question-step-label {
+    display: inline-block;
+    padding: 6px 16px;
+    background: linear-gradient(135deg, rgba(212, 168, 67, 0.15), rgba(212, 168, 67, 0.05));
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+/* Review dots in result screen */
+.review-dots {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+}
+
+.review-dot {
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.review-dot.dot-correct {
+    background: var(--green-dim);
+    color: var(--green-light);
+}
+
+.review-dot.dot-wrong {
+    background: var(--red-dim);
+    color: var(--red-light);
+}
+
+.review-dot.dot-skip {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-dim);
+}
+
+.review-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+}
+
+.review-legend span {
+    white-space: nowrap;
+}
+
 /* ========================
    RESPONSIVE
    ======================== */
@@ -1404,5 +1464,10 @@ body {
         left: 0;
         top: 0;
         margin-bottom: 12px;
+    }
+
+    .review-legend {
+        gap: 8px;
+        font-size: 0.7rem;
     }
 }

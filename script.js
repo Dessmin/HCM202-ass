@@ -1,357 +1,397 @@
 // ========================
-// GAME DATA
+// GAME DATA — 6 VỤ ÁN × 5 CÂU HỎI
+// Mỗi vụ án có 5 câu hỏi theo cấu trúc:
+//   Q1: Bệnh tiêu cực nào? (Phần 2)
+//   Q2: Nguyên nhân mắc bệnh? (Phần 3)
+//   Q3: Án phạt phù hợp? (Phần 4 — BP2, BP3)
+//   Q4: Biện pháp khắc phục? (Phần 4 — tổng hợp)
+//   Q5: Kiểm soát lại như thế nào? (Phần 1)
 // ========================
+
+const QUESTION_LABELS = [
+    "🔍 Xác định bệnh tiêu cực",
+    "🧠 Nguyên nhân mắc bệnh",
+    "⚖️ Tuyên án phạt",
+    "🛡️ Biện pháp khắc phục",
+    "🔒 Kiểm soát lại"
+];
 
 const CASES = [
     {
         id: 1,
-        title: "Vụ án Giám đốc Sở X",
+        title: "Vụ án Giám đốc Sở tham ô",
         defendant: { name: "Nguyễn Văn A", role: "Giám đốc Sở Tài nguyên - Môi trường tỉnh H", avatar: "🧑‍💼" },
         description: `Ông Nguyễn Văn A, Giám đốc Sở Tài nguyên - Môi trường tỉnh H, trong suốt 5 năm giữ chức đã lợi dụng quyền hạn để thu lợi bất chính hơn 8 tỉ đồng. Ông ta nhận hối lộ từ các doanh nghiệp khai thác khoáng sản, cấp giấy phép trái quy định, đồng thời sử dụng xe công, tài sản công cho mục đích cá nhân. Tiền tham ô được chuyển vào tài khoản người thân để che giấu.`,
         questions: [
             {
-                label: "Câu hỏi 1: Xác định loại vi phạm",
-                text: "Hành vi của ông Nguyễn Văn A thuộc loại tiêu cực nào theo phân loại của Hồ Chí Minh?",
+                text: "Hành vi lấy của công dùng vào việc tư, nhận hối lộ và lợi dụng chức quyền thu lợi bất chính của ông A thuộc loại bệnh tiêu cực nào?",
                 options: [
-                    "Quan liêu",
-                    "Tham ô (Giặc nội xâm)",
-                    "Lãng phí",
-                    "Cậy thế"
+                    "Quan liêu — xa rời thực tế, chỉ xem báo cáo trên giấy",
+                    "Tham ô — lấy của công dùng vào việc tư, quên cả thanh liêm, đạo đức",
+                    "Lãng phí — lãng phí sức lao động, thời gian và tiền của",
+                    "Cậy thế — ỷ vào vị trí để coi thường kỷ luật"
                 ],
                 correct: 1,
-                explanation: `Đúng! Đây là hành vi **THAM Ô** — lấy của công dùng vào việc tư, quên cả thanh liêm, đạo đức. Hồ Chí Minh xếp tham ô vào nhóm "Giặc nội xâm" cùng với lãng phí và quan liêu. Ông A đã nhận hối lộ, cấp phép trái quy định, sử dụng tài sản công cho cá nhân — tất cả đều là biểu hiện điển hình của tham ô.`
+                explanation: `Đây là hành vi **THAM Ô** — thuộc nhóm "Giặc nội xâm". Hồ Chí Minh định nghĩa tham ô là **lấy của công dùng vào việc tư, quên cả thanh liêm, đạo đức**. Ông A nhận hối lộ, cấp phép trái quy định, sử dụng tài sản công cho cá nhân — tất cả đều là biểu hiện điển hình.`
             },
             {
-                label: "Câu hỏi 2: Xác định nguyên nhân gốc rễ",
-                text: "Nguyên nhân gốc rễ (chủ quan) dẫn đến hành vi sai phạm của ông A là gì?",
+                text: "Theo Hồ Chí Minh, nguyên nhân gốc rễ (chủ quan) khiến ông A sa vào tham ô là gì?",
                 options: [
-                    "Do công tác cán bộ của Đảng chưa tốt",
-                    "Do tàn dư chế độ thực dân, phong kiến",
-                    "Do chủ nghĩa cá nhân — \"bệnh mẹ\"",
+                    "Do công tác cán bộ của Đảng và Nhà nước chưa tốt",
+                    "Do tàn dư của chế độ thực dân, phong kiến",
+                    "Do chủ nghĩa cá nhân — căn \"bệnh mẹ\", thiếu tu dưỡng rèn luyện bản thân",
                     "Do trình độ phát triển xã hội còn thấp"
                 ],
                 correct: 2,
-                explanation: `Chính xác! Hồ Chí Minh chỉ rõ nguyên nhân chủ quan bắt nguồn từ căn **"bệnh mẹ" là CHỦ NGHĨA CÁ NHÂN**, từ sự thiếu tu dưỡng, rèn luyện của bản thân cán bộ. Ông A đã đặt lợi ích cá nhân lên trên lợi ích nhân dân, quên đi nhiệm vụ phục vụ dân.`
+                explanation: `Hồ Chí Minh chỉ rõ nguyên nhân chủ quan bắt nguồn từ căn **"bệnh mẹ" là CHỦ NGHĨA CÁ NHÂN**, từ sự **thiếu tu dưỡng, rèn luyện** của bản thân cán bộ. Từ "bệnh mẹ" này sinh ra tất cả "bệnh con": tham ô, lãng phí, quan liêu... Ông A đã đặt lợi ích cá nhân lên trên lợi ích nhân dân.`
             },
             {
-                label: "Câu hỏi 3: Chọn biện pháp xử lý",
-                text: "Theo tư tưởng Hồ Chí Minh, biện pháp xử lý phù hợp nhất cho trường hợp này là gì?",
+                text: "Với hành vi tham ô 8 tỉ đồng, theo tư tưởng Hồ Chí Minh, án phạt phù hợp cho ông A là gì?",
                 options: [
-                    "Chỉ giáo dục, phê bình nhẹ nhàng vì ông A có nhiều đóng góp",
-                    "Xử phạt nghiêm minh theo pháp luật, không có vùng cấm",
-                    "Chuyển công tác sang vị trí khác",
-                    "Chỉ yêu cầu hoàn trả tài sản là đủ"
+                    "Phê bình nhẹ nhàng, cho cơ hội sửa sai vì có nhiều đóng góp",
+                    "Chuyển sang vị trí khác, giảm quyền hạn",
+                    "Xử phạt nghiêm minh theo pháp luật — \"thẳng tay trừng trị\", không có vùng cấm",
+                    "Chỉ yêu cầu hoàn trả tài sản là đủ, không cần truy tố"
+                ],
+                correct: 2,
+                explanation: `Hồ Chí Minh khẳng định: **"Trăm điều phải có thần linh pháp quyền"** — tuyệt nhiên **KHÔNG CÓ VÙNG CẤM**. Phải **"thẳng tay trừng trị"** kẻ thoái hóa, biến chất, **dù ở địa vị nào**. Người đã từng ký **sắc lệnh tử hình** đối với tội tham ô ở mức cao nhất để làm gương. Kết hợp "Chống" (xử phạt) và "Xây" (giáo dục).`
+            },
+            {
+                text: "Ngoài việc xử phạt, biện pháp khắc phục nào cần được áp dụng để ngăn tái phạm?",
+                options: [
+                    "Chỉ cần tăng lương cho cán bộ là đủ",
+                    "Kết hợp \"Xây\" và \"Chống\": xử phạt nghiêm minh + giáo dục đạo đức cách mạng, khơi dậy lương tâm",
+                    "Chỉ cần giáo dục, không cần xử phạt",
+                    "Cho nghỉ hưu sớm, không cần biện pháp thêm"
                 ],
                 correct: 1,
-                explanation: `Đúng! Theo Hồ Chí Minh: **"Trăm điều phải có thần linh pháp quyền"**, tuyệt nhiên không có vùng cấm. Cần **thẳng tay trừng trị** đối với kẻ thoái hóa, biến chất, dù ở địa vị nào. Người đã từng ký sắc lệnh tử hình đối với tội tham ô ở mức cao nhất. Kết hợp "Xây" và "Chống": xử phạt nghiêm minh, đúng người đúng tội.`
+                explanation: `Biện pháp 3 theo Hồ Chí Minh: **Kết hợp "Xây" và "Chống"**. "Chống" = xử phạt nghiêm minh, đúng người đúng tội. "Xây" = coi trọng giáo dục đạo đức cách mạng, khơi dậy lương tâm. **Phương châm: làm cho cái tốt được phát huy, cái xấu mất dần đi.** Cán bộ phải giữ cái "tâm" trong sạch, tránh "dĩ công vi tư".`
+            },
+            {
+                text: "Để ngăn chặn tình trạng tham ô trong Sở TN-MT, cần kiểm soát lại như thế nào?",
+                options: [
+                    "Chỉ cần kiểm soát bên trong (giữa các cơ quan) là đủ",
+                    "Chỉ cần kiểm soát từ trên xuống là đủ",
+                    "Kết hợp kiểm soát bên trong (Nhà nước) VÀ bên ngoài (nhân dân), cả từ trên xuống và từ dưới lên",
+                    "Không cần kiểm soát thêm, pháp luật đã đủ răn đe"
+                ],
+                correct: 2,
+                explanation: `Hồ Chí Minh nêu rõ cần kết hợp: **Kiểm soát bên trong** (phân công, phân nhiệm, bỏ phiếu tín nhiệm) VÀ **Kiểm soát bên ngoài** (của nhân dân). Đồng thời áp dụng **hai cách**: từ trên xuống VÀ từ dưới lên. Người nhấn mạnh: "Phải tổ chức sự kiểm soát, mà muốn kiểm soát đúng thì cũng phải có **quần chúng giúp** mới được".`
             }
         ]
     },
     {
         id: 2,
-        title: "Vụ án Chủ tịch huyện B",
+        title: "Vụ án Chủ tịch huyện quan liêu",
         defendant: { name: "Trần Thị B", role: "Chủ tịch UBND huyện M, tỉnh N", avatar: "👩‍💼" },
-        description: `Bà Trần Thị B giữ chức Chủ tịch UBND huyện M suốt 8 năm. Trong thời gian đó, bà chỉ ngồi trong phòng đọc báo cáo, ký giấy tờ mà không bao giờ xuống cơ sở kiểm tra thực tế. Nhiều công trình xây dựng tại huyện bị rút ruột, chất lượng kém nhưng bà không hề hay biết. Khi người dân phản ánh, bà phớt lờ và cho rằng "đã có cấp dưới lo". Hậu quả: 3 công trình trường học bị sập sau 2 năm sử dụng.`,
+        description: `Bà Trần Thị B giữ chức Chủ tịch UBND huyện M suốt 8 năm. Bà chỉ ngồi trong phòng đọc báo cáo, ký giấy tờ mà không bao giờ xuống cơ sở kiểm tra thực tế. Nhiều công trình xây dựng bị rút ruột, chất lượng kém nhưng bà không hay biết. Khi người dân phản ánh, bà phớt lờ và nói "đã có cấp dưới lo". Hậu quả: 3 công trình trường học sập sau 2 năm sử dụng, nhiều dự án đội vốn hàng chục tỉ đồng.`,
         questions: [
             {
-                label: "Câu hỏi 1: Xác định loại vi phạm",
-                text: "Hành vi của bà B thuộc loại tiêu cực nào?",
+                text: "Bà B chỉ xem báo cáo trên giấy, không kiểm tra thực tế, xa rời quần chúng, dẫn đến cấp dưới rút ruột công trình. Bà mắc bệnh tiêu cực nào?",
                 options: [
-                    "Đặc quyền, đặc lợi",
-                    "Tham ô",
-                    "Quan liêu (Bệnh gốc)",
-                    "Tư túng, chia rẽ"
+                    "Tham ô — lấy của công dùng vào việc tư",
+                    "Đặc quyền, đặc lợi — hách dịch với dân",
+                    "Quan liêu — \"bệnh gốc\" sinh ra tham ô, lãng phí",
+                    "Tư túng — kéo bè kéo cánh"
                 ],
                 correct: 2,
-                explanation: `Chính xác! Đây là biểu hiện điển hình của **QUAN LIÊU** — "bệnh gốc" sinh ra tham ô, lãng phí. Bà B "chỉ biết khai hội, viết chỉ thị, xem báo cáo trên giấy mà không kiểm tra thực tế, xa rời quần chúng" — đúng như Hồ Chí Minh mô tả: "có mắt mà không thấy suốt, có tai mà không nghe thấu". Bệnh quan liêu đã ấp ủ, dung túng, che chở cho nạn tham ô (rút ruột công trình).`
+                explanation: `Đây là **QUAN LIÊU** — "bệnh gốc" sinh ra tham ô, lãng phí. Hồ Chí Minh mô tả: chỉ biết khai hội, viết chỉ thị, xem báo cáo trên giấy mà **không kiểm tra thực tế**, xa rời quần chúng — **"có mắt mà không thấy suốt, có tai mà không nghe thấu"**. Bệnh quan liêu đã **ấp ủ, dung túng, che chở** cho nạn tham ô (rút ruột công trình).`
             },
             {
-                label: "Câu hỏi 2: Mối quan hệ giữa các loại tiêu cực",
-                text: "Theo Hồ Chí Minh, để trừ sạch nạn rút ruột công trình (tham ô, lãng phí) ở huyện M, trước hết phải làm gì?",
+                text: "Ngoài nguyên nhân chủ quan (chủ nghĩa cá nhân), nguyên nhân khách quan nào trực tiếp tạo điều kiện cho bà B quan liêu?",
                 options: [
-                    "Tăng lương cho cán bộ",
-                    "Tẩy sạch bệnh quan liêu trước",
-                    "Mời chuyên gia nước ngoài giám sát",
-                    "Đầu tư thêm ngân sách"
+                    "Do âm mưu chống phá của lực lượng phản động",
+                    "Do cách tổ chức, vận hành và sự phối hợp chưa khoa học, hiệu quả",
+                    "Do trình độ phát triển xã hội thấp",
+                    "Do tàn dư chế độ thực dân, phong kiến"
                 ],
                 correct: 1,
-                explanation: `Đúng! Hồ Chí Minh nhấn mạnh: **"Muốn trừ sạch tham ô, lãng phí thì trước hết phải TẨY SẠCH BỆNH QUAN LIÊU"**. Quan liêu là bệnh gốc — nếu lãnh đạo xa rời thực tế, không kiểm tra giám sát thì tham ô, lãng phí sẽ được ấp ủ và che chở.`
+                explanation: `Nguyên nhân khách quan trực tiếp là **cách tổ chức, vận hành trong Đảng, Nhà nước và sự phối hợp chưa thật sự khoa học, hiệu quả**. Khi bộ máy thiếu cơ chế giám sát chặt chẽ, thiếu quy trình báo cáo minh bạch, người đứng đầu dễ rơi vào quan liêu mà không bị phát hiện kịp thời.`
             },
             {
-                label: "Câu hỏi 3: Vai trò kiểm soát",
-                text: "Để ngăn chặn tình trạng tương tự, hình thức kiểm soát nào cần được tăng cường?",
+                text: "Bà B để xảy ra hậu quả nghiêm trọng (3 trường học sập). Theo nguyên tắc Hồ Chí Minh, bà phải chịu án phạt như thế nào?",
                 options: [
-                    "Chỉ cần kiểm soát bên trong (của Nhà nước) là đủ",
-                    "Chỉ cần kiểm soát bên ngoài (của nhân dân) là đủ",
-                    "Cần kết hợp cả kiểm soát bên trong và bên ngoài (nhân dân)",
-                    "Không cần kiểm soát, chỉ cần giáo dục"
+                    "Miễn trách nhiệm vì bà không trực tiếp rút ruột công trình",
+                    "Nghiêm minh xử lý — dù ở địa vị nào cũng phải bị xử lý, không có vùng cấm",
+                    "Chỉ khiển trách nhẹ vì bà là phụ nữ",
+                    "Cho thôi chức là đủ, không cần kỷ luật thêm"
+                ],
+                correct: 1,
+                explanation: `**"Thẳng tay trừng trị"** — dù ở **địa vị nào, làm nghề nghiệp gì** cũng phải bị xử lý. Bà B với cương vị Chủ tịch huyện phải chịu trách nhiệm về mọi hậu quả xảy ra trên địa bàn. **"Chức vụ càng cao, trách nhiệm nêu gương càng lớn"** — bà không nêu gương mà còn để xảy ra sai phạm nghiêm trọng.`
+            },
+            {
+                text: "Muốn trừ sạch nạn rút ruột công trình (tham ô, lãng phí) ở huyện M, trước hết phải làm gì?",
+                options: [
+                    "Đầu tư thêm ngân sách cho huyện",
+                    "Mời chuyên gia nước ngoài giám sát",
+                    "Tẩy sạch bệnh quan liêu trước — vì quan liêu là bệnh gốc",
+                    "Tăng lương cho cán bộ huyện"
                 ],
                 correct: 2,
-                explanation: `Chính xác! Cần kết hợp cả hai hình thức: **Kiểm soát bên trong** (phân công, phân nhiệm, bỏ phiếu tín nhiệm) và **Kiểm soát bên ngoài** (của nhân dân). Hồ Chí Minh nhấn mạnh: "Phải tổ chức sự kiểm soát, mà muốn kiểm soát đúng thì cũng phải có quần chúng giúp mới được". Đảng và Nhà nước phải dựa hẳn vào quần chúng.`
+                explanation: `Hồ Chí Minh nhấn mạnh: **"Muốn trừ sạch tham ô, lãng phí thì TRƯỚC HẾT phải TẨY SẠCH BỆNH QUAN LIÊU"**. Quan liêu là **"bệnh gốc"** — nếu lãnh đạo xa rời thực tế, không giám sát sát sao thì tham ô, lãng phí sẽ được ấp ủ, dung túng, che chở. Chữa bệnh phải chữa từ gốc.`
+            },
+            {
+                text: "Để lãnh đạo huyện không rơi vào bệnh quan liêu, cần tăng cường hình thức kiểm soát nào?",
+                options: [
+                    "Kiểm soát bên ngoài (của nhân dân) — dựa hẳn vào quần chúng để đôn đốc, kiểm tra",
+                    "Không cần kiểm soát, chỉ cần chọn người tốt vào vị trí",
+                    "Chỉ cần kiểm soát từ trên xuống là đủ",
+                    "Bỏ phiếu tín nhiệm 10 năm một lần"
+                ],
+                correct: 0,
+                explanation: `Cần tăng cường **Kiểm soát bên ngoài (của nhân dân)**. Hồ Chí Minh nhấn mạnh: Đảng và Nhà nước phải **"dựa hẳn vào quần chúng"** để đôn đốc và kiểm tra công việc. Nhân dân là **chủ thể tối cao** của quyền lực, có quyền kiểm soát. Nếu quần chúng được tổ chức giám sát tốt, bà B không thể "ngồi phòng đọc báo cáo" suốt 8 năm mà không ai phát hiện.`
             }
         ]
     },
     {
         id: 3,
-        title: "Vụ án Phó Giám đốc C",
+        title: "Vụ án Phó Giám đốc lãng phí",
         defendant: { name: "Lê Văn C", role: "Phó Giám đốc Sở Xây dựng tỉnh P", avatar: "🧑‍💼" },
-        description: `Ông Lê Văn C, Phó Giám đốc Sở Xây dựng, liên tục tổ chức các buổi hội nghị, hội thảo xa hoa với kinh phí hàng trăm triệu đồng từ ngân sách nhà nước. Mỗi chuyến công tác, ông đều ở khách sạn 5 sao, đặt vé máy bay hạng thương gia, tổ chức tiệc chiêu đãi hoành tráng. Trong khi đó, nhiều dự án nhà ở cho người nghèo bị đình trệ vì thiếu kinh phí. Ngân sách sở chi sai mục đích lên đến 15 tỉ đồng.`,
+        description: `Ông Lê Văn C, Phó Giám đốc Sở Xây dựng, liên tục tổ chức các buổi hội nghị, hội thảo xa hoa với kinh phí hàng trăm triệu đồng từ ngân sách nhà nước. Mỗi chuyến công tác, ông đều ở khách sạn 5 sao, đặt vé máy bay hạng thương gia, tổ chức tiệc chiêu đãi hoành tráng. Ông coi những quyền lợi xa hoa này là "hiển nhiên" với chức vụ của mình. Trong khi đó, nhiều dự án nhà ở cho người nghèo bị đình trệ vì thiếu kinh phí. Ngân sách sở chi sai mục đích lên đến 15 tỉ đồng.`,
         questions: [
             {
-                label: "Câu hỏi 1: Xác định loại vi phạm",
-                text: "Hành vi chi tiêu xa hoa, sử dụng ngân sách sai mục đích của ông C thuộc loại tiêu cực nào?",
+                text: "Hành vi chi tiêu xa hoa, sử dụng ngân sách sai mục đích, coi đặc quyền là \"hiển nhiên\" của ông C thuộc bệnh tiêu cực nào?",
                 options: [
-                    "Tham ô",
-                    "Lãng phí (Giặc nội xâm)",
-                    "Kiêu ngạo",
-                    "Quan liêu"
-                ],
-                correct: 1,
-                explanation: `Đúng! Đây là hành vi **LÃNG PHÍ** — lãng phí tiền của, sức lao động và thời gian. Hồ Chí Minh lên án gay gắt tội lãng phí vì đó là **mồ hôi nước mắt của dân**. Ông C dùng tiền ngân sách (tiền thuế của dân) cho các hoạt động xa hoa không cần thiết, trong khi dân nghèo thiếu nhà ở — đây là biểu hiện điển hình của lãng phí.`
-            },
-            {
-                label: "Câu hỏi 2: Liên hệ đặc quyền đặc lợi",
-                text: "Ngoài lãng phí, hành vi của ông C còn thể hiện biểu hiện tiêu cực nào khác?",
-                options: [
-                    "Tư túng, chia rẽ",
-                    "Đặc quyền, đặc lợi — biểu hiện của chủ nghĩa cá nhân",
-                    "Cậy thế",
-                    "Không có biểu hiện nào khác"
-                ],
-                correct: 1,
-                explanation: `Chính xác! Hành vi của ông C còn thể hiện **ĐẶC QUYỀN, ĐẶC LỢI** — hách dịch, lạm dụng chức quyền để hưởng thụ cuộc sống xa hoa bằng tiền công. Đây là biểu hiện của chủ nghĩa cá nhân — đặt lợi ích cá nhân lên trên tất cả, coi mình là "quan" chứ không phải "đầy tớ" của nhân dân.`
-            },
-            {
-                label: "Câu hỏi 3: Biện pháp phòng ngừa",
-                text: "Biện pháp nào mang tính căn bản và lâu dài nhất để ngăn chặn tình trạng lãng phí như trên?",
-                options: [
-                    "Siết chặt kỷ luật và pháp luật",
-                    "Cán bộ phải nêu gương",
-                    "Phát huy dân chủ trong xã hội",
-                    "Huy động sức mạnh chủ nghĩa yêu nước"
+                    "Tham ô — lấy của công dùng vào việc tư",
+                    "Quan liêu — xa rời quần chúng",
+                    "Lãng phí + Đặc quyền, đặc lợi — lãng phí mồ hôi nước mắt của dân, hưởng đặc lợi bất chính",
+                    "Tư túng — kéo bè kéo cánh"
                 ],
                 correct: 2,
-                explanation: `Chính xác! **Phát huy dân chủ trong xã hội** là giải pháp **căn bản và có ý nghĩa lâu dài** nhất. Nâng cao trình độ dân trí về dân chủ, thực hành dân chủ rộng rãi để nhân dân thực hiện quyền làm chủ — từ đó nhân dân có thể giám sát việc chi tiêu ngân sách, phát hiện và tố cáo lãng phí.`
+                explanation: `Ông C mắc đồng thời:\n• **LÃNG PHÍ** — lãng phí sức lao động, thời gian và tiền của. Người lên án gay gắt vì đó là **mồ hôi nước mắt của dân**.\n• **ĐẶC QUYỀN, ĐẶC LỢI** — tư tưởng "cửa quyền", tự cho mình quyền hưởng thụ xa hoa từ chức vụ. Đây là biểu hiện của **chủ nghĩa cá nhân**.`
+            },
+            {
+                text: "Ông C coi việc hưởng thụ xa hoa là \"hiển nhiên\" với chức vụ. Tư tưởng này có nguồn gốc khách quan từ đâu?",
+                options: [
+                    "Do công tác cán bộ chưa tốt",
+                    "Do âm mưu lực lượng phản động",
+                    "Do tàn dư chế độ thực dân, phong kiến — tư tưởng \"làm quan để hưởng lộc\"",
+                    "Do trình độ phát triển xã hội thấp"
+                ],
+                correct: 2,
+                explanation: `Tư tưởng "làm quan để hưởng lộc", "một người làm quan cả họ được nhờ" là **tàn dư của chính sách phản động của chế độ thực dân, phong kiến**. Tư tưởng này còn ăn sâu trong tiềm thức xã hội, khiến cán bộ coi chức vụ như phương tiện hưởng thụ thay vì công cụ phục vụ nhân dân. Đây là nguyên nhân khách quan thứ 4 theo Hồ Chí Minh.`
+            },
+            {
+                text: "Về án phạt, nguyên tắc nào của Hồ Chí Minh cần được áp dụng cho ông C?",
+                options: [
+                    "Xem xét giảm nhẹ vì ông C không trực tiếp ăn cắp tiền",
+                    "Cho thôi chức, không cần xử lý hình sự",
+                    "\"Trăm điều phải có thần linh pháp quyền\" — xử phạt nghiêm minh, đúng người đúng tội, không có vùng cấm",
+                    "Chỉ cần phê bình nội bộ"
+                ],
+                correct: 2,
+                explanation: `**"Trăm điều phải có thần linh pháp quyền"** — KHÔNG CÓ VÙNG CẤM. Pháp luật phải **nghiêm minh**, công tác kiểm tra phải **thường xuyên**. Dù ông C "chỉ" lãng phí chứ không trực tiếp ăn cắp, nhưng lãng phí vẫn là "giặc nội xâm" vì đó là mồ hôi nước mắt của dân. Cần xử phạt **đúng người đúng tội**.`
+            },
+            {
+                text: "Biện pháp khắc phục CĂN BẢN và có ý nghĩa LÂU DÀI nhất để ngăn chặn lãng phí trong bộ máy nhà nước là gì?",
+                options: [
+                    "Siết chặt kỷ luật Đảng và pháp luật",
+                    "Cán bộ phải nêu gương",
+                    "Phát huy dân chủ trong xã hội — nâng cao dân trí, thực hành dân chủ rộng rãi",
+                    "Kết hợp \"Xây\" và \"Chống\""
+                ],
+                correct: 2,
+                explanation: `**Biện pháp 1: Phát huy dân chủ trong xã hội** — đây là giải pháp **CĂN BẢN và có ý nghĩa LÂU DÀI** nhất. Nâng cao trình độ **dân trí về dân chủ**, thực hành dân chủ rộng rãi để nhân dân thực hiện **quyền làm chủ** — từ đó giám sát chi tiêu ngân sách, phát hiện lãng phí.`
+            },
+            {
+                text: "HCM nêu 2 điều kiện để kiểm soát quyền lực hiệu quả. Đó là gì?",
+                options: [
+                    "Kiểm soát phải có hệ thống + Người kiểm soát phải rất có uy tín",
+                    "Kiểm soát phải bất ngờ + Người kiểm soát phải là cấp trên",
+                    "Kiểm soát phải theo mùa + Người kiểm soát phải là thanh tra",
+                    "Kiểm soát phải có giấy phép + Người kiểm soát phải qua đào tạo"
+                ],
+                correct: 0,
+                explanation: `Hồ Chí Minh nêu **2 điều kiện**: ① **Kiểm soát phải có hệ thống** — tổ chức bài bản, có quy trình rõ ràng, không tùy tiện. ② **Người đi kiểm soát phải là những người RẤT CÓ UY TÍN** — có đạo đức, năng lực, được nhân dân tin tưởng. Đồng thời có **2 cách**: từ trên xuống và từ dưới lên. Phải **"khéo kiểm soát"**.`
             }
         ]
     },
     {
         id: 4,
-        title: "Vụ án Bí thư huyện D",
+        title: "Vụ án Bí thư huyện tư túng",
         defendant: { name: "Phạm Văn D", role: "Bí thư Huyện ủy huyện K", avatar: "🧑‍💼" },
-        description: `Ông Phạm Văn D trúng cử Bí thư Huyện ủy huyện K. Ngay sau khi nhậm chức, ông bổ nhiệm em trai vào vị trí Trưởng phòng Tài chính, cháu ruột vào vị trí Phó phòng Nội vụ, và bạn thân thời đại học vào chức Giám đốc Ban Quản lý dự án — mặc dù cả ba đều không đáp ứng đủ tiêu chuẩn chuyên môn. Nhiều cán bộ có năng lực bị gạt ra ngoài, gây bất bình lớn trong nội bộ.`,
+        description: `Ông Phạm Văn D trúng cử Bí thư Huyện ủy huyện K. Ngay sau khi nhậm chức, ông bổ nhiệm em trai vào vị trí Trưởng phòng Tài chính, cháu ruột làm Phó phòng Nội vụ, bạn thân thời đại học giữ chức Giám đốc Ban QLDA — mặc dù cả ba đều không đủ tiêu chuẩn chuyên môn. Nhiều cán bộ có năng lực bị gạt ra ngoài. Khi bị chất vấn, ông kiêu ngạo tuyên bố: "Tôi là Bí thư, tôi có quyền quyết định nhân sự". Nội bộ huyện K mất đoàn kết nghiêm trọng.`,
         questions: [
             {
-                label: "Câu hỏi 1: Xác định loại vi phạm",
-                text: "Hành vi bổ nhiệm người thân không đủ tiêu chuẩn của ông D thuộc loại tiêu cực nào?",
+                text: "Ông D kéo bè kéo cánh, bổ nhiệm người thân không đủ tài năng, kiêu ngạo coi thường tập thể. Ông mắc những bệnh tiêu cực nào?",
                 options: [
-                    "Quan liêu",
-                    "Tham ô",
-                    "Tư túng, chia rẽ, kiêu ngạo",
-                    "Lãng phí"
+                    "Tham ô + Lãng phí",
+                    "Quan liêu + Đặc quyền đặc lợi",
+                    "Tư túng, chia rẽ + Kiêu ngạo + Cậy thế",
+                    "Chỉ mắc bệnh Kiêu ngạo"
                 ],
                 correct: 2,
-                explanation: `Đúng! Đây là biểu hiện điển hình của **TƯ TÚNG, CHIA RẼ** — kéo bè kéo cánh, đưa người thân cận không có tài năng vào chức vụ, gây mất đoàn kết nội bộ. Ông D đã bổ nhiệm em trai, cháu ruột, bạn thân vào các vị trí quan trọng dù không đủ tiêu chuẩn — đây là hành vi "cài cắm" người thân rất nguy hại.`
+                explanation: `Ông D mắc đồng thời 3 bệnh:\n• **TƯ TÚNG, CHIA RẼ** — kéo bè kéo cánh, đưa người thân cận **không có tài năng** vào chức vụ, gây **mất đoàn kết nội bộ**.\n• **KIÊU NGẠO** — tự cao tự đại, không lắng nghe ý kiến người khác.\n• **CẬY THẾ** — ỷ vào vị trí Bí thư để coi thường kỷ luật, coi thường người khác.\nTất cả đều bắt nguồn từ **chủ nghĩa cá nhân**.`
             },
             {
-                label: "Câu hỏi 2: Nguyên nhân khách quan",
-                text: "Ngoài nguyên nhân chủ quan (chủ nghĩa cá nhân), nguyên nhân khách quan nào đã tạo điều kiện cho hành vi này?",
+                text: "Nguyên nhân khách quan nào trực tiếp để ông D có thể tự ý bổ nhiệm người thân?",
                 options: [
                     "Do trình độ phát triển xã hội thấp",
-                    "Do công tác cán bộ của Đảng và Nhà nước chưa tốt",
-                    "Do tàn dư chế độ thực dân",
-                    "Do âm mưu của lực lượng phản động"
+                    "Do công tác cán bộ của Đảng và Nhà nước chưa tốt — quy trình bổ nhiệm thiếu minh bạch",
+                    "Do âm mưu lực lượng phản động",
+                    "Do tàn dư chế độ thực dân"
                 ],
                 correct: 1,
-                explanation: `Chính xác! **Công tác cán bộ của Đảng và Nhà nước chưa tốt** là nguyên nhân khách quan chính. Khi quy trình bổ nhiệm thiếu minh bạch, thiếu cơ chế giám sát chặt chẽ, thiếu tiêu chuẩn rõ ràng thì người có quyền dễ dàng "lách luật" để bổ nhiệm người thân. Đây là vấn đề mà QĐ 114-QĐ/TW (11/7/2023) đã đề cập rõ.`
+                explanation: `**Công tác cán bộ của Đảng và Nhà nước chưa tốt** — khi quy trình bổ nhiệm thiếu minh bạch, thiếu cơ chế giám sát chặt chẽ, thiếu tiêu chuẩn rõ ràng thì người có quyền dễ dàng "lách luật" để bổ nhiệm người thân. Đây là nguyên nhân khách quan thứ 1 theo Hồ Chí Minh.`
             },
             {
-                label: "Câu hỏi 3: Quy định liên quan",
-                text: "Quy định nào của Bộ Chính trị trực tiếp liên quan đến việc kiểm soát quyền lực trong công tác cán bộ?",
+                text: "Quy định nào của Bộ Chính trị trực tiếp quy định về kiểm soát quyền lực trong công tác cán bộ?",
                 options: [
-                    "QĐ 131-QĐ/TW về kiểm tra, giám sát, kỷ luật đảng",
-                    "QĐ 132-QĐ/TW về điều tra, truy tố, xét xử",
-                    "QĐ 114-QĐ/TW về kiểm soát quyền lực trong công tác cán bộ",
-                    "QĐ 144-QĐ/TW về chuẩn mực đạo đức cách mạng"
+                    "QĐ 131-QĐ/TW ngày 27/10/2023 — về kiểm tra, giám sát, kỷ luật đảng",
+                    "QĐ 132-QĐ/TW ngày 27/10/2023 — về điều tra, truy tố, xét xử",
+                    "QĐ 114-QĐ/TW ngày 11/7/2023 — về kiểm soát quyền lực trong công tác cán bộ",
+                    "QĐ 144-QĐ/TW ngày 09/5/2024 — về chuẩn mực đạo đức cách mạng"
                 ],
                 correct: 2,
-                explanation: `Đúng! **Quy định số 114-QĐ/TW ngày 11/7/2023** của Bộ Chính trị quy định về kiểm soát quyền lực và phòng, chống tham nhũng, tiêu cực **trong công tác cán bộ**. Đây là quy định trực tiếp liên quan đến việc ngăn chặn hành vi tư túng, bổ nhiệm "cánh hẩu" như trường hợp ông D.`
+                explanation: `**Quy định số 114-QĐ/TW ngày 11/7/2023** của Bộ Chính trị — về kiểm soát quyền lực và phòng, chống tham nhũng, tiêu cực **trong công tác cán bộ**. Quy định này trực tiếp ngăn chặn hành vi tư túng, bổ nhiệm "cánh hẩu" như trường hợp ông D.`
+            },
+            {
+                text: "Theo Hồ Chí Minh, ông D với cương vị Bí thư cần thực hiện biện pháp nào trước tiên?",
+                options: [
+                    "Huy động sức mạnh chủ nghĩa yêu nước",
+                    "Phát huy dân chủ trong xã hội",
+                    "Cán bộ phải nêu gương — chức vụ càng cao, trách nhiệm nêu gương càng lớn",
+                    "Siết chặt kỷ luật Đảng"
+                ],
+                correct: 2,
+                explanation: `**Biện pháp 4: Cán bộ phải nêu gương**. Hồ Chí Minh nhấn mạnh: **"Chức vụ càng cao, trách nhiệm nêu gương càng lớn"**. Sự gương mẫu của người lãnh đạo là **mệnh lệnh không lời** có sức thuyết phục nhất. Ông D là Bí thư huyện — chức vụ rất cao — lẽ ra phải là tấm gương sáng, nhưng lại làm ngược lại.`
+            },
+            {
+                text: "Theo Hiến pháp 1946, cơ chế kiểm soát bên trong nào có thể áp dụng khi cán bộ mất uy tín?",
+                options: [
+                    "Mời thanh tra quốc tế vào kiểm tra",
+                    "Chế độ bỏ phiếu tín nhiệm — \"ai không được tín nhiệm thì phải từ chức\"",
+                    "Chuyển sang tỉnh khác công tác",
+                    "Tổ chức biểu tình phản đối"
+                ],
+                correct: 1,
+                explanation: `Theo Hiến pháp 1946, Nghị viện nhân dân có quyền **"Kiểm soát và phê bình Chính phủ"** và áp dụng chế độ **bỏ phiếu tín nhiệm**: **"Bộ trưởng nào không được Nghị viện tín nhiệm thì phải từ chức"**. Đây là cơ chế kiểm soát **bên trong (của Nhà nước)** — đảm bảo chỉ người được tin tưởng mới giữ chức vụ quan trọng.`
             }
         ]
     },
     {
         id: 5,
-        title: "Vụ án Thanh tra E",
+        title: "Vụ án Chánh Thanh tra cậy thế",
         defendant: { name: "Hoàng Văn E", role: "Chánh Thanh tra tỉnh Q", avatar: "🧑‍💼" },
-        description: `Ông Hoàng Văn E, Chánh Thanh tra tỉnh Q, thường xuyên sử dụng chức vụ để gây áp lực lên các doanh nghiệp bị thanh tra. Ông hạch sách, đòi hỏi "lót tay" trước khi ký kết luận thanh tra. Khi người dân đến khiếu nại, ông tỏ thái độ hách dịch, khinh thường, quát nạt và đuổi dân ra khỏi phòng. Ông tự cho mình quyền "ban phát" sự thuận lợi hoặc khó khăn cho bất kỳ ai. Nhiều doanh nghiệp nhỏ bị phá sản vì bị "hành" thủ tục.`,
+        description: `Ông Hoàng Văn E, Chánh Thanh tra tỉnh Q, thường xuyên dùng chức vụ gây áp lực lên doanh nghiệp bị thanh tra. Ông đòi "lót tay" trước khi ký kết luận thanh tra. Khi người dân đến khiếu nại, ông hạch dịch, quát nạt và đuổi dân ra khỏi phòng. Ông tự cho mình quyền "ban phát" thuận lợi hoặc khó khăn cho bất kỳ ai. Nhiều doanh nghiệp nhỏ phá sản vì bị "hành" thủ tục. Một cán bộ cấp dưới biết sai phạm nhưng không dám tố cáo vì sợ bị trả thù.`,
         questions: [
             {
-                label: "Câu hỏi 1: Xác định loại vi phạm",
-                text: "Hành vi hách dịch, coi thường người dân, lạm dụng chức vụ của ông E thuộc loại tiêu cực nào?",
+                text: "Ông E hách dịch với dân, vòi vĩnh \"lót tay\", ỷ vào chức vụ coi thường kỷ luật. Ông mắc bệnh tiêu cực nào?",
                 options: [
-                    "Lãng phí",
-                    "Quan liêu",
-                    "Cậy thế + Đặc quyền, đặc lợi",
-                    "Tư túng, chia rẽ"
+                    "Quan liêu + Lãng phí",
+                    "Cậy thế + Đặc quyền, đặc lợi — ỷ quyền coi thường kỷ luật, hách dịch vơ vét",
+                    "Tư túng + Chia rẽ",
+                    "Chỉ mắc bệnh Kiêu ngạo"
                 ],
-                correct: 2,
-                explanation: `Chính xác! Ông E thể hiện cả hai dạng tiêu cực: **CẬY THẾ** — ỷ vào vị trí trong cơ quan chính phủ để coi thường kỷ luật, coi thường người khác; và **ĐẶC QUYỀN, ĐẶC LỢI** — tư tưởng "cửa quyền", hách dịch với dân, lạm dụng chức quyền để vơ vét tiền cho cá nhân. Cả hai đều là biểu hiện của chủ nghĩa cá nhân.`
+                correct: 1,
+                explanation: `Ông E mắc:\n• **CẬY THẾ** — ỷ vào vị trí trong cơ quan Chính phủ để **coi thường kỷ luật, coi thường người khác**.\n• **ĐẶC QUYỀN, ĐẶC LỢI** — tư tưởng "cửa quyền", **hách dịch với dân**, lạm dụng chức quyền để **vơ vét tiền của** (đòi lót tay). Cả hai đều là biểu hiện của **chủ nghĩa cá nhân**.`
             },
             {
-                label: "Câu hỏi 2: Bản chất quyền lực",
-                text: "Hành vi của ông E đi ngược lại nguyên tắc cơ bản nào về quyền lực nhà nước?",
+                text: "Các nguyên nhân tiêu cực theo HCM có đặc điểm gì?",
                 options: [
-                    "Quyền lực nhà nước là do nhân dân ủy thác, cán bộ là đầy tớ của dân",
-                    "Quyền lực nhà nước là vĩnh viễn không thể thay đổi",
-                    "Cán bộ có quyền tự quyết mọi việc",
-                    "Nhà nước không cần sự giám sát"
+                    "Mỗi nguyên nhân tồn tại biệt lập, không liên quan nhau",
+                    "Chỉ có nguyên nhân chủ quan, không có nguyên nhân khách quan",
+                    "Các nguyên nhân KHÔNG tồn tại biệt lập mà có sự KẾT HỢP với nhau",
+                    "Chỉ có nguyên nhân khách quan, không liên quan đến cán bộ"
+                ],
+                correct: 2,
+                explanation: `Hồ Chí Minh chỉ rõ: các nguyên nhân **KHÔNG tồn tại biệt lập** mà có **sự kết hợp với nhau**. Nguyên nhân chủ quan (chủ nghĩa cá nhân) và 5 nguyên nhân khách quan tác động qua lại, tạo điều kiện cho nhau. Trường hợp ông E: bản thân thiếu tu dưỡng (chủ quan) + cơ chế tổ chức lỏng lẻo (khách quan) = cậy thế hành dân.`
+            },
+            {
+                text: "Ông E hành vi nghiêm trọng (đòi hối lộ, hạch dịch dân). Hồ Chí Minh từng ký văn bản nào thể hiện quyết tâm trừng trị tham nhũng?",
+                options: [
+                    "Sắc lệnh miễn thuế cho cán bộ",
+                    "Sắc lệnh tử hình đối với tội tham ô, trộm cắp ở mức cao nhất",
+                    "Sắc lệnh giảm nhẹ hình phạt cho cán bộ cấp cao",
+                    "Sắc lệnh chuyển cán bộ sai phạm ra nước ngoài"
+                ],
+                correct: 1,
+                explanation: `Hồ Chí Minh đã từng **ký sắc lệnh tử hình** đối với tội tham ô, trộm cắp **ở mức cao nhất** để **làm gương**. Điều này thể hiện nguyên tắc: xử phạt cần **nghiêm minh, đúng người đúng tội**. Kết hợp "Chống" (trừng phạt nghiêm) và "Xây" (giáo dục đạo đức) — làm cho cái tốt phát huy, cái xấu mất dần.`
+            },
+            {
+                text: "Cán bộ cấp dưới biết sai phạm nhưng không dám tố cáo vì sợ trả thù. Điều này phản ánh thiếu sót biện pháp nào?",
+                options: [
+                    "Thiếu phát huy dân chủ + thiếu chính sách bảo vệ cán bộ hiệu quả",
+                    "Thiếu tăng lương cho cán bộ cấp dưới",
+                    "Thiếu huy động sức mạnh yêu nước",
+                    "Thiếu cán bộ cấp trên nêu gương"
                 ],
                 correct: 0,
-                explanation: `Chính xác! Hồ Chí Minh khẳng định: **Quyền lực nhà nước là do nhân dân ủy thác**. Cán bộ, công chức là người được nhân dân giao phó quyền lực để phục vụ nhân dân, chứ không phải để hách dịch, cửa quyền. Ông E đã quên bản chất này và biến quyền lực nhân dân thành quyền lực cá nhân.`
+                explanation: `Phản ánh thiếu **Biện pháp 1: Phát huy dân chủ** — tạo cơ chế để cấp dưới và nhân dân dám lên tiếng. Đồng thời theo Hồ Chí Minh: nếu không có biện pháp phòng, chống và **chính sách bảo vệ cán bộ hiệu quả** thì **nguy cơ mất cán bộ là rất lớn**. Cần tạo môi trường an toàn để người tố cáo được bảo vệ.`
             },
             {
-                label: "Câu hỏi 3: Biện pháp kết hợp",
-                text: "Theo phương châm 'Xây' và 'Chống', điều quan trọng cần làm với trường hợp ông E là gì?",
+                text: "Hồ Chí Minh nhấn mạnh phải \"khéo kiểm soát\". Điều này có nghĩa là gì?",
                 options: [
-                    "Chỉ cần 'Xây' — giáo dục đạo đức là đủ",
-                    "Chỉ cần 'Chống' — xử phạt nghiêm là đủ",
-                    "Kết hợp xử phạt nghiêm minh VÀ giáo dục đạo đức cách mạng",
-                    "Không cần xử lý vì đây là chuyện nhỏ"
+                    "Kiểm soát phải bí mật, không cho ai biết",
+                    "Kiểm soát phải đúng cách, đúng phương pháp, vừa nghiêm khắc vừa linh hoạt",
+                    "Kiểm soát phải nhẹ nhàng, tránh gây mất lòng",
+                    "Kiểm soát phải hình thức cho đẹp báo cáo"
                 ],
-                correct: 2,
-                explanation: `Đúng! Hồ Chí Minh chủ trương **kết hợp "XÂY" và "CHỐNG"**: Xử phạt nghiêm minh, đúng người đúng tội (Chống); đồng thời coi trọng giáo dục đạo đức cách mạng, khơi dậy lương tâm (Xây). Phương châm: làm cho cái tốt được phát huy và cái xấu mất dần đi. Cán bộ phải giữ cái "tâm" trong sạch.`
+                correct: 1,
+                explanation: `**"Khéo kiểm soát"** nghĩa là kiểm soát phải **đúng cách, đúng phương pháp**, vừa **nghiêm khắc** vừa **linh hoạt**, không máy móc cứng nhắc. Kết hợp 2 điều kiện (có hệ thống + người có uy tín) và 2 cách (từ trên xuống + từ dưới lên) một cách thông minh, hiệu quả.`
             }
         ]
     },
     {
         id: 6,
-        title: "Vụ án Phó Chủ tịch F",
-        defendant: { name: "Đỗ Thị F", role: "Phó Chủ tịch UBND tỉnh R", avatar: "👩‍💼" },
-        description: `Bà Đỗ Thị F, Phó Chủ tịch tỉnh R, là một cán bộ có năng lực chuyên môn tốt nhưng dần trở nên kiêu ngạo sau nhiều năm giữ chức. Bà từ chối lắng nghe ý kiến phản biện của cấp dưới, tự ý ra quyết định mà không thông qua tập thể. Khi Nghị viện nhân dân yêu cầu giải trình về một dự án kém hiệu quả trị giá 500 tỉ đồng, bà né tránh và coi nhẹ việc bỏ phiếu tín nhiệm. Bà tuyên bố: "Tôi biết mình làm đúng, không cần ai phê bình".`,
+        title: "Vụ án Chánh án bẻ cong công lý",
+        defendant: { name: "Vũ Văn F", role: "Chánh án Tòa án nhân dân tỉnh T", avatar: "🧑‍⚖️" },
+        description: `Ông Vũ Văn F, Chánh án TAND tỉnh T, bị phát hiện đã nhận hối lộ 5 tỉ đồng để giảm nhẹ hình phạt cho một bị cáo trong vụ án tham nhũng lớn. Ông lợi dụng quyền hạn trong hoạt động xét xử để bẻ cong công lý — bị cáo vốn đáng 20 năm tù chỉ nhận 5 năm tù treo. Khi bị chất vấn, ông nói "Đây là quyền xét xử độc lập của tòa". Vụ việc gây mất niềm tin của nhân dân vào hệ thống tư pháp. Năm 2024, đã có 130 người đứng đầu và cấp phó bị kỷ luật.`,
         questions: [
             {
-                label: "Câu hỏi 1: Hình thức kiểm soát",
-                text: "Việc Nghị viện nhân dân yêu cầu giải trình và tổ chức bỏ phiếu tín nhiệm thuộc hình thức kiểm soát nào?",
+                text: "Ông F nhận hối lộ 5 tỉ, bẻ cong công lý trong xét xử. Đây là biểu hiện của bệnh tiêu cực nào?",
                 options: [
-                    "Kiểm soát bên ngoài (của nhân dân)",
-                    "Kiểm soát bên trong (của Nhà nước)",
-                    "Không thuộc hình thức kiểm soát nào",
-                    "Kiểm soát của tổ chức quốc tế"
-                ],
-                correct: 1,
-                explanation: `Đúng! Đây là **Kiểm soát BÊN TRONG** (Kiểm soát của Nhà nước). Theo Hiến pháp 1946, Nghị viện nhân dân có quyền "Kiểm soát và phê bình Chính phủ". Chế độ **bỏ phiếu tín nhiệm** là cơ chế kiểm soát quan trọng: "Bộ trưởng nào không được Nghị viện tín nhiệm thì phải từ chức".`
-            },
-            {
-                label: "Câu hỏi 2: Loại vi phạm",
-                text: "Thái độ từ chối lắng nghe và coi thường sự giám sát của bà F thuộc biểu hiện nào?",
-                options: [
-                    "Tham ô",
-                    "Lãng phí",
-                    "Kiêu ngạo + Cậy thế",
-                    "Đặc quyền đặc lợi"
+                    "Quan liêu — không kiểm tra thực tế",
+                    "Lãng phí — lãng phí tiền của",
+                    "Tham ô + Đặc quyền, đặc lợi — lấy của công, lạm dụng quyền xét xử để vơ vét",
+                    "Tư túng — kéo bè kéo cánh"
                 ],
                 correct: 2,
-                explanation: `Chính xác! Bà F thể hiện sự **KIÊU NGẠO** — tự cao tự đại, không lắng nghe ý kiến người khác; và **CẬY THẾ** — ỷ vào vị trí quyền lực để coi thường kỷ luật, coi thường cơ chế giám sát. Điều này vi phạm nguyên tắc quan trọng mà Hồ Chí Minh đề ra.`
+                explanation: `Ông F mắc:\n• **THAM Ô** — nhận hối lộ 5 tỉ, lấy tiền bất chính, quên cả thanh liêm, đạo đức.\n• **ĐẶC QUYỀN, ĐẶC LỢI** — lạm dụng chức quyền xét xử (quyền tư pháp) để vơ vét tiền cho cá nhân. Coi quyền xét xử như "tài sản riêng" để mua bán.\nCả hai đều là biểu hiện nghiêm trọng của **chủ nghĩa cá nhân**.`
             },
             {
-                label: "Câu hỏi 3: Trách nhiệm nêu gương",
-                text: "Theo Hồ Chí Minh, bà F với cương vị Phó Chủ tịch tỉnh phải thực hiện nguyên tắc gì?",
+                text: "Nguyên nhân chủ quan — \"bệnh mẹ\" — sinh ra mọi biểu hiện tiêu cực là gì?",
                 options: [
-                    "Chức vụ càng cao, quyền lợi càng nhiều",
-                    "Chức vụ càng cao, trách nhiệm nêu gương càng lớn",
-                    "Cán bộ cấp cao được miễn trách nhiệm nêu gương",
-                    "Nêu gương chỉ dành cho cán bộ cấp thấp"
-                ],
-                correct: 1,
-                explanation: `Chính xác! Hồ Chí Minh nhấn mạnh: **"Chức vụ càng cao, trách nhiệm nêu gương càng lớn"**. Sự gương mẫu của người lãnh đạo là **mệnh lệnh không lời** có sức thuyết phục nhất đối với nhân dân. Bà F với cương vị Phó Chủ tịch tỉnh lại không thể hiện sự gương mẫu, phản bội lại kỳ vọng của nhân dân.`
-            }
-        ]
-    },
-    {
-        id: 7,
-        title: "Vụ án Giám đốc BQL G",
-        defendant: { name: "Ngô Văn G", role: "Giám đốc Ban Quản lý Dự án huyện S", avatar: "🧑‍💼" },
-        description: `Ông Ngô Văn G, Giám đốc Ban Quản lý Dự án huyện S, phụ trách dự án xây dựng đường giao thông nông thôn ngân sách 200 tỉ đồng. Ông biết rõ một quan chức cấp trên đang nhận hối lộ từ nhà thầu để trúng gói thầu, nhưng vì sợ bị trả thù nên im lặng. Bản thân ông không tham ô nhưng cũng không dám tố cáo. Khi được hỏi, ông nói: "Tôi chỉ là cấp dưới, biết gì mà nói". Kết quả: con đường bị rút ruột, hư hỏng nặng sau 1 năm.`,
-        questions: [
-            {
-                label: "Câu hỏi 1: Trách nhiệm công dân",
-                text: "Theo tư tưởng Hồ Chí Minh, thái độ im lặng của ông G phản ánh sự thiếu sót về biện pháp nào?",
-                options: [
-                    "Thiếu siết chặt kỷ luật Đảng",
-                    "Thiếu huy động sức mạnh chủ nghĩa yêu nước — trách nhiệm của toàn dân",
-                    "Thiếu giáo dục đạo đức",
-                    "Thiếu phát huy dân chủ"
-                ],
-                correct: 1,
-                explanation: `Đúng! Hồ Chí Minh chủ trương biến cuộc chiến chống tiêu cực thành **cuộc chiến của TOÀN DÂN** dựa trên lòng tự hào và tự tôn dân tộc. **Bất kỳ người Việt Nam nào**, dù là dân thường hay cán bộ, đều phải có trách nhiệm. Ông G đã thiếu tinh thần yêu nước, thiếu dũng khí đấu tranh — đây là biểu hiện của sự thiếu huy động sức mạnh chủ nghĩa yêu nước.`
-            },
-            {
-                label: "Câu hỏi 2: Vai trò kiểm soát từ dưới lên",
-                text: "Theo Hồ Chí Minh, các cách kiểm soát quyền lực là gì?",
-                options: [
-                    "Chỉ kiểm soát từ trên xuống",
-                    "Chỉ kiểm soát từ dưới lên",
-                    "Hai cách: từ trên xuống và từ dưới lên",
-                    "Không cần kiểm soát nếu đã có pháp luật"
+                    "Bệnh quan liêu",
+                    "Bệnh hình thức",
+                    "Chủ nghĩa cá nhân — gốc rễ của mọi \"bệnh con\"",
+                    "Bệnh thành tích"
                 ],
                 correct: 2,
-                explanation: `Chính xác! Hồ Chí Minh nêu rõ **hai cách kiểm soát**: từ trên xuống VÀ từ dưới lên. Ngoài ra, cần **hai điều kiện**: kiểm soát phải có hệ thống và người đi kiểm soát phải là những người rất có uy tín. Người nhấn mạnh phải "khéo kiểm soát". Trường hợp ông G cho thấy cần tăng cường kiểm soát từ dưới lên — tạo cơ chế bảo vệ để cấp dưới dám tố cáo sai phạm.`
+                explanation: `**CHỦ NGHĨA CÁ NHÂN** — Hồ Chí Minh gọi đây là **"bệnh mẹ"** vì từ căn bệnh này sinh ra tất cả các **"bệnh con"** khác: tham ô, lãng phí, quan liêu, đặc quyền đặc lợi, tư túng, cậy thế, kiêu ngạo... Bắt nguồn từ sự **thiếu tu dưỡng, rèn luyện** của bản thân cán bộ. Muốn chữa bệnh con, phải chữa từ bệnh mẹ.`
             },
             {
-                label: "Câu hỏi 3: Nguyên nhân tổng hợp",
-                text: "Việc ông G không dám tố cáo phản ánh nguyên nhân khách quan nào?",
+                text: "Hành vi lợi dụng quyền xét xử của ông F vi phạm trực tiếp quy định nào?",
                 options: [
-                    "Do tàn dư chế độ phong kiến",
-                    "Do cách tổ chức, vận hành và chính sách bảo vệ cán bộ chưa hiệu quả",
-                    "Do trình độ phát triển xã hội thấp",
-                    "Do âm mưu lực lượng phản động"
-                ],
-                correct: 1,
-                explanation: `Đúng! Việc ông G sợ bị trả thù khi tố cáo phản ánh nguyên nhân khách quan: **cách tổ chức, vận hành trong Đảng, Nhà nước và chính sách bảo vệ cán bộ chưa hiệu quả**. Hồ Chí Minh đã cảnh báo: nếu không có biện pháp phòng, chống và **chính sách bảo vệ cán bộ** hiệu quả thì nguy cơ mất cán bộ là rất lớn.`
-            }
-        ]
-    },
-    {
-        id: 8,
-        title: "Vụ án Chánh án H",
-        defendant: { name: "Vũ Văn H", role: "Chánh án Tòa án nhân dân tỉnh T", avatar: "🧑‍⚖️" },
-        description: `Ông Vũ Văn H, Chánh án Tòa án nhân dân tỉnh T, bị phát hiện đã nhận hối lộ 5 tỉ đồng để giảm nhẹ hình phạt cho một bị cáo trong vụ án tham nhũng lớn. Ông ta lợi dụng quyền hạn trong hoạt động xét xử để bẻ cong công lý. Kết quả: bị cáo vốn đáng bị phạt 20 năm tù chỉ nhận 5 năm tù treo. Vụ việc gây bức xúc dư luận, làm mất niềm tin của nhân dân vào hệ thống tư pháp.`,
-        questions: [
-            {
-                label: "Câu hỏi 1: Quy định liên quan",
-                text: "Hành vi lợi dụng quyền hạn trong xét xử của ông H vi phạm quy định nào của Bộ Chính trị?",
-                options: [
-                    "QĐ 114-QĐ/TW về công tác cán bộ",
-                    "QĐ 131-QĐ/TW về kiểm tra, giám sát, kỷ luật đảng",
-                    "QĐ 132-QĐ/TW về kiểm soát quyền lực trong điều tra, truy tố, xét xử, thi hành án",
-                    "QĐ 144-QĐ/TW về chuẩn mực đạo đức"
+                    "QĐ 114-QĐ/TW — về công tác cán bộ",
+                    "QĐ 131-QĐ/TW — về kiểm tra, giám sát, kỷ luật đảng",
+                    "QĐ 132-QĐ/TW ngày 27/10/2023 — về kiểm soát quyền lực trong điều tra, truy tố, XÉT XỬ, thi hành án",
+                    "QĐ 144-QĐ/TW — về chuẩn mực đạo đức"
                 ],
                 correct: 2,
-                explanation: `Chính xác! **Quy định số 132-QĐ/TW ngày 27/10/2023** của Bộ Chính trị quy định về kiểm soát quyền lực, phòng, chống tham nhũng, tiêu cực **trong hoạt động điều tra, truy tố, XÉT XỬ, thi hành án**. Ông H đã vi phạm nghiêm trọng quy định này bằng việc lợi dụng quyền xét xử để bẻ cong công lý.`
+                explanation: `**Quy định số 132-QĐ/TW ngày 27/10/2023** của Bộ Chính trị — về kiểm soát quyền lực, phòng, chống tham nhũng, tiêu cực **trong hoạt động điều tra, truy tố, XÉT XỬ, thi hành án**. Ông F đã vi phạm nghiêm trọng quy định này bằng việc lợi dụng quyền xét xử để bẻ cong công lý.`
             },
             {
-                label: "Câu hỏi 2: Mức độ nghiêm trọng",
-                text: "Theo tư tưởng Hồ Chí Minh, với trường hợp nghiêm trọng như ông H (Chánh án nhận hối lộ), thái độ xử lý cần như thế nào?",
+                text: "Biện pháp nào biến cuộc chiến chống tiêu cực thành \"cuộc chiến\" của toàn dân?",
                 options: [
-                    "Nên xem xét giảm nhẹ vì ông có chức vụ cao, có nhiều đóng góp",
-                    "Thẳng tay trừng trị, không có vùng cấm, dù ở địa vị nào",
-                    "Chỉ cần kỷ luật Đảng, không cần xử lý hình sự",
-                    "Cho nghỉ hưu sớm là đủ"
+                    "Phát huy dân chủ trong xã hội",
+                    "Siết chặt kỷ luật Đảng",
+                    "Cán bộ phải nêu gương",
+                    "Huy động sức mạnh chủ nghĩa yêu nước — trách nhiệm của mọi người Việt Nam"
                 ],
-                correct: 1,
-                explanation: `Đúng! Hồ Chí Minh khẳng định: phải **"thẳng tay trừng trị"** đối với những kẻ thoái hóa, biến chất, **dù ở địa vị nào, làm nghề nghiệp gì** cũng phải bị xử lý. "Trăm điều phải có thần linh pháp quyền" — tuyệt nhiên **KHÔNG CÓ VÙNG CẤM** cho sự sai phạm. Chức vụ càng cao, trách nhiệm càng lớn.`
+                correct: 3,
+                explanation: `**Biện pháp 5: Huy động sức mạnh chủ nghĩa yêu nước**. Biến cuộc chiến chống tiêu cực thành **"cuộc chiến" của TOÀN DÂN** dựa trên lòng tự hào và tự tôn dân tộc. **Bất kỳ người Việt Nam nào**, dù là dân thường hay cán bộ, đều phải có trách nhiệm tu dưỡng và thực hành đạo đức cách mạng để **bảo vệ danh dự đất nước**.`
             },
             {
-                label: "Câu hỏi 3: Kết quả thực tiễn",
-                text: "Theo số liệu thực tiễn năm 2024, bao nhiêu người đứng đầu và cấp phó bị kỷ luật vì để xảy ra tham nhũng, tiêu cực?",
+                text: "Theo kết quả thực tiễn năm 2024, bao nhiêu người đứng đầu và cấp phó bị kỷ luật, và thu hồi được bao nhiêu tài sản?",
                 options: [
-                    "50 người",
-                    "80 người",
-                    "130 người",
-                    "200 người"
+                    "50 người, thu hồi 5.000 tỉ",
+                    "80 người, thu hồi 10.000 tỉ",
+                    "130 người, thu hồi hơn 22.000 tỉ đồng",
+                    "200 người, thu hồi 50.000 tỉ"
                 ],
                 correct: 2,
-                explanation: `Chính xác! Năm 2024, đã có **130** người đứng đầu và cấp phó bị kỷ luật vì để xảy ra tham nhũng, tiêu cực. Ngoài ra, thu hồi tài sản **hơn 22.000 tỉ đồng** từ án tham nhũng và kinh tế. Đây là minh chứng cho thấy các biện pháp theo tư tưởng Hồ Chí Minh đang được áp dụng hiệu quả vào thực tiễn.`
+                explanation: `Năm 2024: kỷ luật **130** người đứng đầu và cấp phó vì để xảy ra tham nhũng, tiêu cực. Thu hồi tài sản **hơn 22.000 tỉ đồng** từ án tham nhũng và kinh tế. Đây là minh chứng cho thấy các biện pháp theo tư tưởng HCM đang phát huy hiệu quả — **"không có vùng cấm, không có ngoại lệ"**.`
             }
         ]
     }
@@ -367,7 +407,7 @@ let totalQuestions = 0;
 let correctAnswers = 0;
 let wrongAnswers = 0;
 let timerInterval = null;
-let timeLeft = 600; // 10 minutes in seconds
+let timeLeft = 900; // 15 minutes
 let caseResults = [];
 let gameStarted = false;
 
@@ -378,8 +418,6 @@ function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     const screen = document.getElementById(screenId);
     screen.classList.add('active');
-    
-    // Scroll to top
     window.scrollTo(0, 0);
 }
 
@@ -421,11 +459,11 @@ function startGame() {
     score = 0;
     correctAnswers = 0;
     wrongAnswers = 0;
-    timeLeft = 600;
+    timeLeft = 900; // 15 minutes
     totalQuestions = CASES.reduce((acc, c) => acc + c.questions.length, 0);
     caseResults = CASES.map(c => ({
         title: c.title,
-        questions: c.questions.map(() => null) // null = unanswered
+        questions: c.questions.map(() => null)
     }));
     gameStarted = true;
 
@@ -453,7 +491,7 @@ function updateTimerDisplay() {
     const display = document.getElementById('timer-display');
     const timerEl = document.getElementById('game-timer');
     display.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    
+
     timerEl.classList.remove('warning', 'danger');
     if (timeLeft <= 60) {
         timerEl.classList.add('danger');
@@ -464,15 +502,12 @@ function updateTimerDisplay() {
 
 function renderCase() {
     const caseData = CASES[currentCase];
-    
-    // Update counter
+
     document.getElementById('case-current').textContent = currentCase + 1;
     document.getElementById('case-total').textContent = CASES.length;
 
-    // Update question dots
     renderQuestionDots();
 
-    // Render case panel
     const casePanel = document.getElementById('case-panel');
     casePanel.innerHTML = `
         <div class="case-header">
@@ -489,14 +524,11 @@ function renderCase() {
         </div>
     `;
 
-    // Render first question
     renderQuestion();
 
-    // Hide verdict
     const verdictPanel = document.getElementById('verdict-panel');
     verdictPanel.classList.add('hidden');
 
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -504,16 +536,16 @@ function renderQuestionDots() {
     const dotsContainer = document.getElementById('question-dots');
     const caseData = CASES[currentCase];
     dotsContainer.innerHTML = '';
-    
+
     caseData.questions.forEach((_, i) => {
         const dot = document.createElement('div');
         dot.className = 'q-dot';
         if (i === currentQuestion) dot.classList.add('active');
-        
+
         const result = caseResults[currentCase].questions[i];
         if (result === true) dot.classList.add('correct');
         if (result === false) dot.classList.add('wrong');
-        
+
         dotsContainer.appendChild(dot);
     });
 }
@@ -525,7 +557,8 @@ function renderQuestion() {
 
     const questionPanel = document.getElementById('question-panel');
     questionPanel.innerHTML = `
-        <div class="question-label">${q.label}</div>
+        <div class="question-step-label">${QUESTION_LABELS[currentQuestion]}</div>
+        <div class="question-label">Phán quyết ${currentQuestion + 1}/5</div>
         <div class="question-text">${q.text}</div>
         <div class="options-grid">
             ${q.options.map((opt, i) => `
@@ -537,14 +570,11 @@ function renderQuestion() {
         </div>
     `;
 
-    // Hide verdict
     const verdictPanel = document.getElementById('verdict-panel');
     verdictPanel.classList.add('hidden');
 
-    // Update dots
     renderQuestionDots();
 
-    // Update score
     document.getElementById('score-display').textContent = score;
 }
 
@@ -553,7 +583,6 @@ function selectAnswer(index) {
     const q = caseData.questions[currentQuestion];
     const isCorrect = index === q.correct;
 
-    // Disable all buttons
     document.querySelectorAll('.option-btn').forEach((btn, i) => {
         btn.classList.add('disabled');
         btn.onclick = null;
@@ -565,7 +594,6 @@ function selectAnswer(index) {
         }
     });
 
-    // Update score
     if (isCorrect) {
         score += 10;
         correctAnswers++;
@@ -578,14 +606,13 @@ function selectAnswer(index) {
     document.getElementById('score-display').textContent = score;
     renderQuestionDots();
 
-    // Show verdict
     const verdictPanel = document.getElementById('verdict-panel');
     verdictPanel.classList.remove('hidden');
     verdictPanel.className = `verdict-panel ${isCorrect ? 'verdict-correct' : 'verdict-wrong'}`;
 
     const isLastQuestion = currentQuestion >= caseData.questions.length - 1;
     const isLastCase = currentCase >= CASES.length - 1;
-    let nextLabel = '→ Câu tiếp theo';
+    let nextLabel = '→ Phán quyết tiếp theo';
     if (isLastQuestion && !isLastCase) nextLabel = '→ Vụ án tiếp theo';
     if (isLastQuestion && isLastCase) nextLabel = '📊 Xem kết quả';
 
@@ -599,24 +626,20 @@ function selectAnswer(index) {
         </button>
     `;
 
-    // Scroll to verdict
     verdictPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function nextStep() {
     const caseData = CASES[currentCase];
-    
+
     if (currentQuestion < caseData.questions.length - 1) {
-        // Next question in same case
         currentQuestion++;
         renderQuestion();
     } else if (currentCase < CASES.length - 1) {
-        // Next case
         currentCase++;
         currentQuestion = 0;
         renderCase();
     } else {
-        // Game over
         endGame();
     }
 }
@@ -624,10 +647,10 @@ function nextStep() {
 function endGame() {
     clearInterval(timerInterval);
     gameStarted = false;
-    
+
     const maxScore = totalQuestions * 10;
     const percentage = Math.round((score / maxScore) * 100);
-    const timeUsed = 600 - timeLeft;
+    const timeUsed = 900 - timeLeft;
     const minutesUsed = Math.floor(timeUsed / 60);
     const secondsUsed = timeUsed % 60;
 
@@ -636,36 +659,46 @@ function endGame() {
         rank = "THẨM PHÁN XUẤT SẮC";
         icon = "🏆";
         titleClass = "excellent";
-        message = "Bạn thể hiện sự am hiểu sâu sắc về tư tưởng Hồ Chí Minh trong xây dựng Nhà nước trong sạch, vững mạnh!";
+        message = "Bạn thể hiện sự am hiểu sâu sắc về tư tưởng Hồ Chí Minh trong xây dựng Nhà nước trong sạch, vững mạnh! Xứng đáng đứng trên bục vinh quang!";
     } else if (percentage >= 70) {
         rank = "THẨM PHÁN GIỎI";
         icon = "🎖️";
         titleClass = "good";
-        message = "Bạn có kiến thức tốt về phòng chống tiêu cực theo tư tưởng Hồ Chí Minh. Hãy ôn lại một vài điểm để hoàn thiện hơn!";
+        message = "Bạn có kiến thức tốt về phòng chống tiêu cực. Hãy ôn lại một vài điểm nhỏ để hoàn thiện hơn nhé!";
     } else if (percentage >= 50) {
         rank = "THẨM PHÁN KHÁ";
         icon = "📜";
         titleClass = "average";
-        message = "Bạn nắm được những nội dung cơ bản, nhưng cần nghiên cứu kỹ hơn để đưa ra phán quyết chính xác hơn.";
+        message = "Bạn nắm được nội dung cơ bản nhưng cần nghiên cứu sâu hơn để đưa ra phán quyết chính xác hơn.";
     } else {
         rank = "CẦN HỌC THÊM";
         icon = "📚";
         titleClass = "poor";
-        message = "Bạn nên quay lại xem lí thuyết và thử lại. Kiến thức về tư tưởng Hồ Chí Minh rất quan trọng cho việc xây dựng Nhà nước pháp quyền!";
+        message = "Hãy quay lại xem lí thuyết kỹ hơn rồi thử lại. Kiến thức về tư tưởng Hồ Chí Minh rất quan trọng!";
     }
 
-    // Build case review
+    // Build case review with per-question detail
     let caseReviewHTML = '';
     caseResults.forEach((cr, i) => {
         const correctCount = cr.questions.filter(q => q === true).length;
         const totalQ = cr.questions.length;
-        const caseIcon = correctCount === totalQ ? '✅' : correctCount > 0 ? '⚠️' : '❌';
+        const caseIcon = correctCount === totalQ ? '✅' : correctCount >= 3 ? '⚠️' : '❌';
+
+        let detailDots = '';
+        cr.questions.forEach((q, qi) => {
+            const labels = ['🔍', '🧠', '⚖️', '🛡️', '🔒'];
+            const status = q === true ? '✓' : q === false ? '✗' : '—';
+            const cls = q === true ? 'dot-correct' : q === false ? 'dot-wrong' : 'dot-skip';
+            detailDots += `<span class="review-dot ${cls}" title="${QUESTION_LABELS[qi]}">${labels[qi]}${status}</span> `;
+        });
+
         caseReviewHTML += `
             <div class="review-item">
                 <span class="review-icon">${caseIcon}</span>
                 <div>
                     <div class="review-case-name">${cr.title}</div>
-                    <div class="review-detail">${correctCount}/${totalQ} câu đúng</div>
+                    <div class="review-detail">${correctCount}/${totalQ} phán quyết đúng</div>
+                    <div class="review-dots">${detailDots}</div>
                 </div>
             </div>
         `;
@@ -701,6 +734,13 @@ function endGame() {
 
         <div class="case-review">
             <h4>📋 Chi tiết từng vụ án</h4>
+            <div class="review-legend">
+                <span>🔍 Bệnh tiêu cực</span>
+                <span>🧠 Nguyên nhân</span>
+                <span>⚖️ Án phạt</span>
+                <span>🛡️ Khắc phục</span>
+                <span>🔒 Kiểm soát</span>
+            </div>
             ${caseReviewHTML}
         </div>
 
@@ -719,7 +759,6 @@ function endGame() {
 
     showScreen('screen-result');
 
-    // Animate score bar
     setTimeout(() => {
         const bar = document.querySelector('.result-bar-fill');
         if (bar) bar.style.width = percentage + '%';
