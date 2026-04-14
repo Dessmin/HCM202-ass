@@ -1382,6 +1382,61 @@ body {
     letter-spacing: 0.5px;
 }
 
+/* Retry hint for group play */
+.retry-hint {
+    margin-top: 16px;
+    padding: 14px 20px;
+    background: rgba(230, 126, 34, 0.12);
+    border: 1px solid rgba(230, 126, 34, 0.3);
+    border-radius: 12px;
+    color: var(--orange);
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.retry-hint.hidden {
+    display: none;
+}
+
+@keyframes shakeHint {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+}
+
+.shake-hint {
+    animation: shakeHint 0.5s ease !important;
+}
+
+/* Verdict bonus/retry info */
+.verdict-bonus {
+    display: inline-block;
+    padding: 6px 16px;
+    background: linear-gradient(135deg, rgba(39, 174, 96, 0.2), rgba(39, 174, 96, 0.08));
+    border: 1px solid rgba(39, 174, 96, 0.3);
+    border-radius: 20px;
+    color: var(--green-light);
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+}
+
+.verdict-retry-info {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(230, 126, 34, 0.12);
+    border: 1px solid rgba(230, 126, 34, 0.25);
+    border-radius: 20px;
+    color: var(--orange);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+}
+
 /* Review dots in result screen */
 .review-dots {
     display: flex;
@@ -1405,6 +1460,11 @@ body {
 .review-dot.dot-wrong {
     background: var(--red-dim);
     color: var(--red-light);
+}
+
+.review-dot.dot-retry {
+    background: rgba(230, 126, 34, 0.15);
+    color: var(--orange);
 }
 
 .review-dot.dot-skip {

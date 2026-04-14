@@ -404,12 +404,13 @@ let currentCase = 0;
 let currentQuestion = 0;
 let score = 0;
 let totalQuestions = 0;
-let correctAnswers = 0;
-let wrongAnswers = 0;
+let firstTryCorrect = 0;
+let totalAttempts = 0;
 let timerInterval = null;
 let timeLeft = 900; // 15 minutes
 let caseResults = [];
 let gameStarted = false;
+let currentAttempts = 0; // attempts for current question
 
 // ========================
 // SCREEN MANAGEMENT
@@ -457,13 +458,14 @@ function startGame() {
     currentCase = 0;
     currentQuestion = 0;
     score = 0;
-    correctAnswers = 0;
-    wrongAnswers = 0;
+    firstTryCorrect = 0;
+    totalAttempts = 0;
+    currentAttempts = 0;
     timeLeft = 900; // 15 minutes
     totalQuestions = CASES.reduce((acc, c) => acc + c.questions.length, 0);
     caseResults = CASES.map(c => ({
         title: c.title,
-        questions: c.questions.map(() => null)
+        questions: c.questions.map(() => ({ correct: false, attempts: 0 }))
     }));
     gameStarted = true;
 
@@ -543,8 +545,8 @@ function renderQuestionDots() {
         if (i === currentQuestion) dot.classList.add('active');
 
         const result = caseResults[currentCase].questions[i];
-        if (result === true) dot.classList.add('correct');
-        if (result === false) dot.classList.add('wrong');
+        if (result.correct) dot.classList.add('correct');
+        else if (result.attempts > 0 && i < currentQuestion) dot.classList.add('wrong');
 
         dotsContainer.appendChild(dot);
     });
@@ -554,6 +556,7 @@ function renderQuestion() {
     const caseData = CASES[currentCase];
     const q = caseData.questions[currentQuestion];
     const letters = ['A', 'B', 'C', 'D'];
+    currentAttempts = 0;
 
     const questionPanel = document.getElementById('question-panel');
     questionPanel.innerHTML = `
@@ -567,6 +570,9 @@ function renderQuestion() {
                     <span>${opt}</span>
                 </button>
             `).join('')}
+        </div>
+        <div class="retry-hint hidden" id="retry-hint">
+            💡 Chưa đúng! Hãy thử chọn đáp án khác...
         </div>
     `;
 
@@ -582,33 +588,65 @@ function selectAnswer(index) {
     const caseData = CASES[currentCase];
     const q = caseData.questions[currentQuestion];
     const isCorrect = index === q.correct;
+    currentAttempts++;
+    totalAttempts++;
 
+    const selectedBtn = document.getElementById(`option-${index}`);
+
+    if (!isCorrect) {
+        // WRONG: eliminate this option, let player try again
+        selectedBtn.classList.add('wrong', 'disabled');
+        selectedBtn.onclick = null;
+
+        // Show retry hint
+        const retryHint = document.getElementById('retry-hint');
+        if (retryHint) {
+            retryHint.classList.remove('hidden');
+            retryHint.classList.add('shake-hint');
+            setTimeout(() => retryHint.classList.remove('shake-hint'), 500);
+        }
+
+        // Track attempts
+        caseResults[currentCase].questions[currentQuestion].attempts = currentAttempts;
+        return; // Don't proceed — let them try again
+    }
+
+    // CORRECT: lock all buttons, show explanation
     document.querySelectorAll('.option-btn').forEach((btn, i) => {
         btn.classList.add('disabled');
         btn.onclick = null;
         if (i === q.correct) {
             btn.classList.add('correct');
         }
-        if (i === index && !isCorrect) {
-            btn.classList.add('wrong');
-        }
     });
 
-    if (isCorrect) {
-        score += 10;
-        correctAnswers++;
-        caseResults[currentCase].questions[currentQuestion] = true;
-    } else {
-        wrongAnswers++;
-        caseResults[currentCase].questions[currentQuestion] = false;
-    }
+    // Score based on attempts: 1st try = 10, 2nd = 7, 3rd = 4, 4th = 1
+    const pointsMap = [10, 7, 4, 1];
+    const points = pointsMap[Math.min(currentAttempts - 1, 3)];
+    score += points;
+
+    if (currentAttempts === 1) firstTryCorrect++;
+
+    caseResults[currentCase].questions[currentQuestion] = {
+        correct: true,
+        attempts: currentAttempts
+    };
 
     document.getElementById('score-display').textContent = score;
     renderQuestionDots();
 
+    // Hide retry hint
+    const retryHint = document.getElementById('retry-hint');
+    if (retryHint) retryHint.classList.add('hidden');
+
     const verdictPanel = document.getElementById('verdict-panel');
     verdictPanel.classList.remove('hidden');
-    verdictPanel.className = `verdict-panel ${isCorrect ? 'verdict-correct' : 'verdict-wrong'}`;
+
+    const attemptsText = currentAttempts === 1
+        ? `<span class="verdict-bonus">🌟 Đúng ngay lần đầu! +${points} điểm</span>`
+        : `<span class="verdict-retry-info">Đúng sau ${currentAttempts} lần thử · +${points} điểm</span>`;
+
+    verdictPanel.className = `verdict-panel verdict-correct`;
 
     const isLastQuestion = currentQuestion >= caseData.questions.length - 1;
     const isLastCase = currentCase >= CASES.length - 1;
@@ -618,8 +656,9 @@ function selectAnswer(index) {
 
     verdictPanel.innerHTML = `
         <div class="verdict-header">
-            ${isCorrect ? '✅ Phán quyết chính xác!' : '❌ Phán quyết chưa đúng!'}
+            ✅ Phán quyết chính xác!
         </div>
+        ${attemptsText}
         <div class="verdict-explanation">${q.explanation}</div>
         <button class="verdict-next-btn" onclick="nextStep()">
             ${nextLabel}
@@ -680,15 +719,24 @@ function endGame() {
     // Build case review with per-question detail
     let caseReviewHTML = '';
     caseResults.forEach((cr, i) => {
-        const correctCount = cr.questions.filter(q => q === true).length;
+        const firstTryCount = cr.questions.filter(q => q.attempts === 1).length;
         const totalQ = cr.questions.length;
-        const caseIcon = correctCount === totalQ ? '✅' : correctCount >= 3 ? '⚠️' : '❌';
+        const caseIcon = firstTryCount === totalQ ? '🌟' : firstTryCount >= 3 ? '✅' : '⚠️';
 
         let detailDots = '';
         cr.questions.forEach((q, qi) => {
             const labels = ['🔍', '🧠', '⚖️', '🛡️', '🔒'];
-            const status = q === true ? '✓' : q === false ? '✗' : '—';
-            const cls = q === true ? 'dot-correct' : q === false ? 'dot-wrong' : 'dot-skip';
+            let status, cls;
+            if (q.attempts === 1) {
+                status = '✓';
+                cls = 'dot-correct';
+            } else if (q.attempts > 1) {
+                status = q.attempts + '×';
+                cls = 'dot-retry';
+            } else {
+                status = '—';
+                cls = 'dot-skip';
+            }
             detailDots += `<span class="review-dot ${cls}" title="${QUESTION_LABELS[qi]}">${labels[qi]}${status}</span> `;
         });
 
@@ -697,7 +745,7 @@ function endGame() {
                 <span class="review-icon">${caseIcon}</span>
                 <div>
                     <div class="review-case-name">${cr.title}</div>
-                    <div class="review-detail">${correctCount}/${totalQ} phán quyết đúng</div>
+                    <div class="review-detail">${firstTryCount}/${totalQ} đúng ngay lần đầu</div>
                     <div class="review-dots">${detailDots}</div>
                 </div>
             </div>
@@ -718,12 +766,12 @@ function endGame() {
             </div>
             <div class="result-stats">
                 <div class="result-stat">
-                    <div class="result-stat-num green">${correctAnswers}</div>
-                    <div class="result-stat-label">Đúng</div>
+                    <div class="result-stat-num green">${firstTryCorrect}</div>
+                    <div class="result-stat-label">Đúng lần đầu</div>
                 </div>
                 <div class="result-stat">
-                    <div class="result-stat-num red">${wrongAnswers}</div>
-                    <div class="result-stat-label">Sai</div>
+                    <div class="result-stat-num gold">${totalQuestions - firstTryCorrect}</div>
+                    <div class="result-stat-label">Cần thử lại</div>
                 </div>
                 <div class="result-stat">
                     <div class="result-stat-num gold">${minutesUsed}:${secondsUsed.toString().padStart(2, '0')}</div>
